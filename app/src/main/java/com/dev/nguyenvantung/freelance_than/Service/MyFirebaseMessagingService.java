@@ -21,6 +21,8 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import static android.support.v4.app.NotificationCompat.DEFAULT_ALL;
+import static android.support.v4.app.NotificationCompat.DEFAULT_SOUND;
+import static android.support.v4.app.NotificationCompat.PRIORITY_DEFAULT;
 import static android.support.v4.app.NotificationCompat.PRIORITY_HIGH;
 import static android.support.v4.app.NotificationCompat.PRIORITY_MAX;
 import static android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC;
@@ -50,17 +52,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentTitle(TITLE)
                 .setContentText(body)
                 .setVisibility(VISIBILITY_PUBLIC)
-                .setPriority(PRIORITY_HIGH)
-                .setDefaults(DEFAULT_ALL)
-//                .setWhen(System.currentTimeMillis())
-                .setFullScreenIntent(pendingIntent, true)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                // Set the intent that will fire when the user taps the notification
+                .setPriority(PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
+                .setAutoCancel(true)
+                .setFullScreenIntent(pendingIntent, true);
 
-        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        mBuilder.setSound(alarmSound);
+//        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//        mBuilder.setSound(alarmSound);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(0, mBuilder.build());
