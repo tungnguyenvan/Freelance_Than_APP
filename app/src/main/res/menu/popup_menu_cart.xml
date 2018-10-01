@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="chuyển sang chờ"
+        android:id="@+id/popup_wait"/>
+
+    <item android:title="Kích hoạt"
+        android:id="@+id/popup_active"/>
+
+    <item android:title="Sửa"
+        android:icon="@drawable/ic_edit_24dp"
+        android:id="@+id/popup_edit"/>
+
+    <item android:title="Xóa"
+        android:icon="@drawable/ic_delete_24dp"
+        android:id="@+id/popup_delete"/>
+
+</menu>

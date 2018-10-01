@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.ShowAll.ShowAllActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Toolbar
+                android:id="@+id/show_all_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:targetApi="lollipop">
+                <TextView
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:text="Thông tin"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </Toolbar>
+        </android.support.design.widget.AppBarLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="@dimen/margin_8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tt_id"
+                android:textStyle="bold"
+                android:textColor="#FF0000"
+                android:layout_marginTop="@dimen/margin_8"
+                android:textSize="18sp"
+                android:text="ID: "
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tt_name"
+                android:text="Họ và tên: "
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="#fff"
+                android:padding="3dp"
+                android:id="@+id/tt_blood"
+                android:background="#FF0000"
+                android:text="Nhóm máu: "
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tt_status"
+                android:text="Trạng thái: "
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tt_phone"
+                android:text="Số điện thoại: "
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tt_zalo"
+                android:text="Zalo: "
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tt_job"
+                android:text="Công việc: "
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tt_birthday"
+                android:text="Ngày sinh: "
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tt_cmnd"
+                android:text="CMND: "
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="SHK:"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/SHK"
+                android:transitionName="shareImage"
+                tools:layout_editor_absoluteX="167dp"
+                tools:layout_editor_absoluteY="230dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="XNDS:"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/XNDS"
+                android:transitionName="shareImage"
+                tools:layout_editor_absoluteX="167dp"
+                tools:layout_editor_absoluteY="230dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="GKS:"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/GKS"
+                android:transitionName="shareImage"
+                tools:layout_editor_absoluteX="167dp"
+                tools:layout_editor_absoluteY="230dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="GKH:"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/GKH"
+                android:transitionName="shareImage"
+                tools:layout_editor_absoluteX="167dp"
+                tools:layout_editor_absoluteY="230dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tt_address"
+                android:text="Địa chỉ: "
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tt_agress"
+                android:text="Đồng ý: "
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tt_date_register"
+                android:text="Ngày đăng ký: "
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tt_description"
+                android:text="Mô tả: "
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_gravity="center_horizontal"
+                android:text="----- Khác -----"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/show_img_khac1"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/show_img_khac2"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/show_img_khac3"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/show_img_khac4"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/show_img_khac5"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/show_btn_wait"
+                android:text="Chờ"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/show_btn_active"
+                android:text="Thành công"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_width="match_parent"
+                android:layout_height="56dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

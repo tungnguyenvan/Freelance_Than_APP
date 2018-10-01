@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Freelance_Than</string>
+    <string name="login">Đăng nhập</string>
+    <string name="default_notification_channel_id"></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
