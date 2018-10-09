@@ -1,50 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
+<LinearLayout android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.Home.Fragment.Active.ActivedFragment">
+    tools:context=".View.Home.Fragment.Active.ActivedFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="56dp">
-        <Toolbar
+        <android.support.v7.widget.Toolbar
+            app:titleTextColor="@color/colorWhite"
+            app:title="Thành công"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:targetApi="lollipop">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:text="Thành công"
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.3dp"
-                    android:background="@color/colorAccent" />
-            </RelativeLayout>
-        </Toolbar>
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
+        android:layout_marginTop="@dimen/margin_8"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:text="Theo nhóm máu: "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
         <Spinner
             android:id="@+id/active_spinner"
+            android:layout_weight="1"
+            android:background="@drawable/bg_spinner"
             android:layout_marginLeft="@dimen/margin_8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"/>
+
+        <Spinner
+            android:id="@+id/active_snp_sex"
+            android:layout_weight="1"
+            android:background="@drawable/bg_spinner"
+            android:layout_marginLeft="@dimen/margin_8"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"/>
     </LinearLayout>
 
     <RelativeLayout

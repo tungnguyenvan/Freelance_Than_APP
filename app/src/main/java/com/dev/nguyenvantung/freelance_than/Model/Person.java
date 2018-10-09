@@ -12,6 +12,15 @@ public class Person implements Serializable {
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("sex")
+    @Expose
+    private String sex;
+    @SerializedName("height")
+    @Expose
+    private String height;
+    @SerializedName("weight")
+    @Expose
+    private String weight;
     @SerializedName("phone")
     @Expose
     private String phone;
@@ -73,9 +82,12 @@ public class Person implements Serializable {
     @Expose
     private String status;
 
-    public Person(String id, String name, String phone, String zalo, String job, String birthday, String cMND, String sHK, String xNDS, String gKS, String gKH, String khac1, String khac2, String khac3, String khac4, String khac5, String address, String argee, String blood, String description, String dateRegister, String status) {
+    public Person(String id, String name, String sex, String height, String weight, String phone, String zalo, String job, String birthday, String cMND, String sHK, String xNDS, String gKS, String gKH, String khac1, String khac2, String khac3, String khac4, String khac5, String address, String argee, String blood, String description, String dateRegister, String status) {
         this.id = id;
         this.name = name;
+        this.sex = sex;
+        this.height = height;
+        this.weight = weight;
         this.phone = phone;
         this.zalo = zalo;
         this.job = job;
@@ -96,6 +108,30 @@ public class Person implements Serializable {
         this.description = description;
         this.dateRegister = dateRegister;
         this.status = status;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
     }
 
     public String getcMND() {

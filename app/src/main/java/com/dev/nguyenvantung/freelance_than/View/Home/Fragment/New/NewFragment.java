@@ -9,13 +9,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +50,7 @@ public class NewFragment extends Fragment implements ViewNewFragment, View.OnCli
     private RecyclerView new_recyclerview;
     private ProgressBar new_progressbar;
     private SwipeRefreshLayout new_swipe;
+    private Spinner new_spinner, new_snp_sex;
 
     private HomeView homeView;
 
@@ -91,8 +96,8 @@ public class NewFragment extends Fragment implements ViewNewFragment, View.OnCli
                 new_txt_title.setText(dateQuery);
                 new_progressbar.setVisibility(View.VISIBLE);
                 personList.clear();
-                adapter.notifyDataSetChanged();
                 newPresscenterLogic.GetPsonFromDate(dateQuery);
+                new_txt_title.setText(dayOfMonth + "/" + month + "/" + year);
             }
         };
 
@@ -110,10 +115,36 @@ public class NewFragment extends Fragment implements ViewNewFragment, View.OnCli
         new_swipe     = view.findViewById(R.id.new_swipe);
         new_btn_timer = view.findViewById(R.id.new_btn_timer);
         new_txt_title = view.findViewById(R.id.new_txt_title);
-        new_txt_title.setText(dateQuery);
+        String[] arrDay = dateQuery.split("/");
+        new_txt_title.setText(arrDay[2] + "/" + arrDay[1] + "/" + arrDay[0]);
         new_progressbar= view.findViewById(R.id.new_progressbar);
         new_recyclerview= view.findViewById(R.id.new_recyclerview);
         initRecyclerview();
+
+
+
+        new_spinner = view.findViewById(R.id.new_spinner);
+        List<String> listBlood = new ArrayList<>();
+        listBlood.add("Lọc theo nhóm máu");
+        listBlood.add("Chưa biết");
+        listBlood.add("O");
+        listBlood.add("A");
+        listBlood.add("B");
+        listBlood.add("AB");
+        ArrayAdapter<String> adapterBlood = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_selectable_list_item, listBlood);
+        adapterBlood.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        new_spinner.setAdapter(adapterBlood);
+
+        new_snp_sex = view.findViewById(R.id.new_snp_sex);
+        List<String> listSex = new ArrayList<>();
+        listSex.add("Lọc theo giới tính");
+        listSex.add("Nam");
+        listSex.add("Nữ");
+        ArrayAdapter<String> adapterSex = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_selectable_list_item, listSex);
+        adapterSex.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        new_snp_sex.setAdapter(adapterSex);
     }
 
     private void initRecyclerview() {
@@ -129,6 +160,56 @@ public class NewFragment extends Fragment implements ViewNewFragment, View.OnCli
     private void addEvents() {
         new_btn_timer.setOnClickListener(this);
         new_swipe.setOnRefreshListener(this);
+
+        new_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) swipeRefresh();
+                else if (new_snp_sex.getSelectedItemPosition() == 0) getPersonFormBlood();
+                else getPersonSex();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        new_snp_sex.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) swipeRefresh();
+                else getPersonSex();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void getPersonSex() {
+        new_progressbar.setVisibility(View.VISIBLE);
+        String sex;
+        if (new_snp_sex.getSelectedItemPosition() == 1) sex = "Nam";
+        else sex = "Nữ";
+        Log.d(TAG, sex);
+        if (new_spinner.getSelectedItemPosition() > 0){
+            personList.clear();
+            newPresscenterLogic.getPersonFromSexAndBlood(sex,
+                    new_spinner.getSelectedItemPosition() - 1, dateQuery);
+        }else {
+            personList.clear();
+            newPresscenterLogic.getPersonFromSex(sex, dateQuery);
+        }
+    }
+
+    private void getPersonFormBlood() {
+        new_progressbar.setVisibility(View.VISIBLE);
+        personList.clear();
+        new_progressbar.setVisibility(View.VISIBLE);
+        newPresscenterLogic.getPersonFromBlood(dateQuery, new_spinner.getSelectedItemPosition() - 1);
     }
 
     @Override
@@ -140,25 +221,24 @@ public class NewFragment extends Fragment implements ViewNewFragment, View.OnCli
         }
     }
 
-    private void SortList() {
-
-    }
-
     @Override
     public void getDataSuccess(List<Person> personList) {
         if (personList.size() > 0) {
+            this.personList.clear();
             this.personList.addAll(personList);
-            adapter.notifyDataSetChanged();
             new_progressbar.setVisibility(View.GONE);
         }else {
             Toast.makeText(getContext(), "Không có dữ liệu", Toast.LENGTH_SHORT).show();
         }
+        adapter.notifyDataSetChanged();
         new_swipe.setRefreshing(false);
     }
 
     @Override
     public void getDataFail() {
         new_progressbar.setVisibility(View.GONE);
+        personList.clear();
+        adapter.notifyDataSetChanged();
         Toast.makeText(getContext(), "Không có dữ liệu", Toast.LENGTH_SHORT).show();
     }
 
@@ -190,7 +270,14 @@ public class NewFragment extends Fragment implements ViewNewFragment, View.OnCli
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUESTCODE_EDIT_PERSON || requestCode == REQUESTCODE_SHOW_PERSON) swipeRefresh();
+        if (requestCode == REQUESTCODE_EDIT_PERSON || requestCode == REQUESTCODE_SHOW_PERSON){
+            new_progressbar.setVisibility(View.VISIBLE);
+            if (new_spinner.getSelectedItemPosition() == 0 && new_snp_sex.getSelectedItemPosition() == 0)
+                swipeRefresh();
+            else if (new_spinner.getSelectedItemPosition() > 0 && new_snp_sex.getSelectedItemPosition() == 0)
+                getPersonFormBlood();
+            else getPersonSex();
+        }
     }
 
 

@@ -15,25 +15,179 @@
         android:orientation="vertical"
         >
 
-        <TextView
-            android:id="@+id/edit_id"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="ID: "
-            android:textColor="#FF0000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/edit_id"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="ID: "
+                android:textColor="#FF0000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="13/12/1"
+                android:layout_marginLeft="@dimen/margin_8"
+                android:id="@+id/edit_date_register"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/edit_name"
+            android:drawableLeft="@drawable/ic_person"
+            android:drawablePadding="@dimen/margin_8"
             android:hint="Tên khách hàng"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Ngày sinh: "
+                android:drawableLeft="@drawable/ic_calenda"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/margin_8"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/edit_birthday"
+                android:hint="Ngày tháng năm sinh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:drawableLeft="@drawable/ic_location"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/margin_8"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:text="Địa chỉ: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/snp_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:drawablePadding="@dimen/margin_8"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/ic_job"
+                android:text="Nghề nghiệp: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/edit_job"
+                android:hint="Nghề nghiệp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/margin_8"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:drawableLeft="@drawable/ic_sex"
+                android:text="Giới tính:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Spinner
+                android:id="@+id/snp_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:drawableLeft="@drawable/ic_height"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/margin_8"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:text="Chiều cao:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/edit_height"
+                android:hint="Chiều cao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Cân nặng: "
+                android:drawableLeft="@drawable/ic_weight"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/margin_8"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/edit_weight"
+                android:hint="Cân nặng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:drawableLeft="@drawable/ic_cmnd"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/margin_8"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:text="CMND: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/edit_cmnd"
+                android:hint="Số chứng mình"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 android:text="SDT: "
+                android:textColor="@color/colorBlack"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:drawablePadding="@dimen/margin_8"
+                android:drawableLeft="@drawable/ic_call"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <EditText
@@ -54,11 +208,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 android:text="Zalo: "
+                android:drawableLeft="@drawable/ic_zalo"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/margin_8"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <EditText
@@ -67,64 +227,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="Nghề nghiệp: "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/edit_job"
-                android:hint="Nghề nghiệp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="NS: "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/edit_birthday"
-                android:hint="Ngày tháng năm sinh"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="CMND: "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/edit_cmnd"
-                android:hint="Số chứng mình"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="Địa chỉ: "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/snp_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
+                android:drawableLeft="@drawable/ic_agress"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/margin_8"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
                 android:text="Đồng ý: "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -138,6 +250,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:drawableLeft="@drawable/ic_blood"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/margin_8"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
                 android:text="Nhóm máu: "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -167,6 +284,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:drawableLeft="@drawable/ic_desc"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/margin_8"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
                 android:text="Ghi chú:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -178,8 +300,22 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btn_khac1"
+            android:text="Chứng minh nhân dân"
+            android:textAllCaps="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/img_khac1"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
             android:id="@+id/btn_shk"
-            android:text="SHK"
+            android:text="Sổ hộ khẩu"
+            android:textAllCaps="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -190,20 +326,9 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/btn_xnds"
-            android:text="XNDS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:id="@+id/img_xnds"
-            android:scaleType="centerCrop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
             android:id="@+id/btn_gks"
-            android:text="GKS"
+            android:text="Giấy khai sinh"
+            android:textAllCaps="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -214,25 +339,27 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/btn_gkh"
-            android:text="GKH"
+            android:id="@+id/btn_xnds"
+            android:text="Xác nhận dân sự"
+            android:textAllCaps="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <ImageView
-            android:id="@+id/img_gkh"
+            android:id="@+id/img_xnds"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/btn_khac1"
-            android:text="GKH"
+            android:id="@+id/btn_gkh"
+            android:text="Giấy kết hôn"
+            android:textAllCaps="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <ImageView
-            android:id="@+id/img_khac1"
+            android:id="@+id/img_gkh"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

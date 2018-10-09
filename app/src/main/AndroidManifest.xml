@@ -13,23 +13,23 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_lauch"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_lauch"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.Splash.SplashActivity">
+        <activity android:name=".View.Splash.SplashActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.Login.LoginActivity" />
-        <activity android:name=".View.Home.Fragment.HomeActivity" />
-        <activity android:name=".View.ShowAll.ShowAllActivity" />
-        <activity android:name=".View.Edit.EditActivity" />
-        <activity android:name=".View.ViewImage.ViewImageActivity"></activity>
+        <activity android:name=".View.Login.LoginActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".View.Home.Fragment.HomeActivity" android:screenOrientation="portrait" />
+        <activity android:name=".View.ShowAll.ShowAllActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".View.Edit.EditActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".View.ViewImage.ViewImageActivity" android:screenOrientation="portrait"/>
         <service android:name=".Service.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

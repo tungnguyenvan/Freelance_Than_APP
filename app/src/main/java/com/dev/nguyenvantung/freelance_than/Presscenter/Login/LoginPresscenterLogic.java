@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.dev.nguyenvantung.freelance_than.Common.Common;
 import com.dev.nguyenvantung.freelance_than.Model.Admin;
+import com.dev.nguyenvantung.freelance_than.Model.Message;
 import com.dev.nguyenvantung.freelance_than.View.Login.ViewLoginActivity;
 
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class LoginPresscenterLogic implements LoginPresscenterIMP {
             public void onResponse(Call<Admin> call, Response<Admin> response) {
                 if (response.body().getId() != null) {
                     if (Integer.parseInt(response.body().getId()) > 0) {
-                        viewLoginActivity.loginSuccess();
+                        viewLoginActivity.loginSuccess(response.body());
                     } else {
                         viewLoginActivity.loginFail();
                     }
@@ -42,6 +43,23 @@ public class LoginPresscenterLogic implements LoginPresscenterIMP {
             @Override
             public void onFailure(Call<Admin> call, Throwable t) {
                 Log.e(TAG, t.getLocalizedMessage());
+            }
+        });
+    }
+
+    @Override
+    public void updateToken(int id, String token) {
+        Call<Message> call = Common.DATA_CLIENT.updateToken(Common.CONTROLLER_ADMIN,
+                Common.ACTION_UPDATE_TOKEN, id, token);
+        call.enqueue(new Callback<Message>() {
+            @Override
+            public void onResponse(Call<Message> call, Response<Message> response) {
+                if (!response.body().getMessage()) viewLoginActivity.updateTokenFail();
+            }
+
+            @Override
+            public void onFailure(Call<Message> call, Throwable t) {
+                Log.e(TAG, "Error: " + t.getLocalizedMessage());
             }
         });
     }

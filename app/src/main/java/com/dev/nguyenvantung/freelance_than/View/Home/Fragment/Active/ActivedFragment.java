@@ -7,12 +7,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -41,7 +41,7 @@ public class ActivedFragment extends Fragment implements ViewActiveFragment, Swi
     private ProgressBar active_progressbar;
     private SwipeRefreshLayout active_swipe;
 //    private Button active_sort;
-    private Spinner active_spinner;
+    private Spinner active_spinner, active_snp_sex;
 
     private HomeView homeView;
 
@@ -94,6 +94,16 @@ public class ActivedFragment extends Fragment implements ViewActiveFragment, Swi
                 android.R.layout.simple_selectable_list_item, listBlood);
         adapterBlood.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         active_spinner.setAdapter(adapterBlood);
+
+        active_snp_sex = view.findViewById(R.id.active_snp_sex);
+        List<String> listSex = new ArrayList<>();
+        listSex.add("Lọc theo giới tính");
+        listSex.add("Nam");
+        listSex.add("Nữ");
+        ArrayAdapter<String> adapterSex = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_selectable_list_item, listSex);
+        adapterSex.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        active_snp_sex.setAdapter(adapterSex);
     }
 
     private void initRecyclerview() {
@@ -113,7 +123,21 @@ public class ActivedFragment extends Fragment implements ViewActiveFragment, Swi
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) swipeRefresh();
-                else getPersonFormBlood(position - 1);
+                else if (active_snp_sex.getSelectedItemPosition() == 0) getPersonFormBlood();
+                else getPersonSex();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        active_snp_sex.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) swipeRefresh();
+                else getPersonSex();
             }
 
             @Override
@@ -123,22 +147,40 @@ public class ActivedFragment extends Fragment implements ViewActiveFragment, Swi
         });
     }
 
-    private void getPersonFormBlood(int blood) {
+    private void getPersonSex(){
+        active_progressbar.setVisibility(View.VISIBLE);
+        String sex;
+        if (active_snp_sex.getSelectedItemPosition() == 1) sex = "Nam";
+        else sex = "Nữ";
+        Log.d(TAG, sex);
+        if (active_spinner.getSelectedItemPosition() > 0){
+            personList.clear();
+            activePresscenterLogic.getPersonFromSexAndBlood(sex,
+                    active_spinner.getSelectedItemPosition() - 1, 2);
+        }else {
+            personList.clear();
+            activePresscenterLogic.getPersonFromSex(sex, 2);
+        }
+    }
+
+    private void getPersonFormBlood() {
+        active_progressbar.setVisibility(View.VISIBLE);
         personList.clear();
         active_progressbar.setVisibility(View.VISIBLE);
-        activePresscenterLogic.getPersonFromBlood(2, blood);
+        activePresscenterLogic.getPersonFromBlood(2, active_spinner.getSelectedItemPosition() - 1);
     }
 
     @Override
     public void getDataSuccess(List<Person> personList) {
         if (personList.size() > 0) {
+            this.personList.clear();
             this.personList.addAll(personList);
-            activedAdapter.notifyDataSetChanged();
-            active_progressbar.setVisibility(View.GONE);
         }else {
             Toast.makeText(getContext(), "Không có dữ liệu", Toast.LENGTH_SHORT).show();
         }
+        activedAdapter.notifyDataSetChanged();
         active_swipe.setRefreshing(false);
+        active_progressbar.setVisibility(View.GONE);
     }
 
     @Override
@@ -152,13 +194,14 @@ public class ActivedFragment extends Fragment implements ViewActiveFragment, Swi
     public void swipeRefresh() {
         personList.clear();
         active_progressbar.setVisibility(View.VISIBLE);
-        if (active_spinner.getSelectedItemPosition() == 0) activePresscenterLogic.getDataActive();
-        else active_spinner.setSelection(0);
+        activePresscenterLogic.getDataActive();
+        active_spinner.setSelection(0);
+        active_snp_sex.setSelection(0);
     }
 
     @Override
     public void sortSuccess() {
-        Toast.makeText(getContext(), "Sắp xếp thành công", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "Sắp xếp thành công", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -183,7 +226,14 @@ public class ActivedFragment extends Fragment implements ViewActiveFragment, Swi
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUESTCODE_EDIT_PERSON || requestCode == REQUESTCODE_SHOW_PERSON) swipeRefresh();
+        if (requestCode == REQUESTCODE_EDIT_PERSON || requestCode == REQUESTCODE_SHOW_PERSON) {
+            active_progressbar.setVisibility(View.VISIBLE);
+            if (active_spinner.getSelectedItemPosition() == 0 && active_snp_sex.getSelectedItemPosition() == 0)
+                swipeRefresh();
+            else if (active_spinner.getSelectedItemPosition() > 0 && active_snp_sex.getSelectedItemPosition() == 0)
+                getPersonFormBlood();
+            else getPersonSex();
+        }
     }
 
     @Override

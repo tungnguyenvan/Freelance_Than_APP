@@ -25,6 +25,14 @@ public interface DataClient {
                               @Field(Common.ACTION) String action,
                               @Field(Common.USER_NAME) String user_name,
                               @Field(Common.PASSWORD) String password);
+
+    @FormUrlEncoded
+    @POST(Common.WEB_API)
+    Call<Message> updateToken(@Field(Common.CONTROLLER) String controller,
+                              @Field(Common.ACTION) String action,
+                              @Field(Common.ID) int id,
+                              @Field(Common.TOKEN) String token);
+
     //////////////////////////////////////////////////////////////
     //=========================== Person ==========================
     @FormUrlEncoded
@@ -68,6 +76,12 @@ public interface DataClient {
     Call<List<Person>> getPersonSorted(@Field(Common.CONTROLLER) String controller,
                                        @Field(Common.ACTION) String action,
                                        @Field(Common.STATUS) int status, @Field(Common.BLOOD) int blood);
+    @FormUrlEncoded
+    @POST(Common.WEB_API)
+    Call<List<Person>> getPersonSorted(@Field(Common.CONTROLLER) String controller,
+                                       @Field(Common.ACTION) String action,
+                                       @Field(Common.DATE_REGISTER) String date_register,
+                                       @Field(Common.BLOOD) int blood);
 
 
     //Update person
@@ -77,6 +91,9 @@ public interface DataClient {
                                @Field(Common.ACTION) String action,
                                @Field("id") int id,
                                @Field("name") String name,
+                               @Field("sex") String sex,
+                               @Field("height") String height,
+                               @Field("weight") String weight,
                                @Field("phone") String phone,
                                @Field("zalo") String zalo,
                                @Field("job") String job,
@@ -98,8 +115,44 @@ public interface DataClient {
                                @Field("date_register") String date_register,
                                @Field("status") String status);
 
-    //get person from id
+    //get person from blood and sex
+    @FormUrlEncoded
+    @POST(Common.WEB_API)
+    Call<List<Person>> getPersonFromSexAndBlood(@Field(Common.CONTROLLER) String controller,
+                                                @Field(Common.ACTION) String action,
+                                                @Field(Common.SEX) String sex,
+                                                @Field(Common.BLOOD) int blood,
+                                                @Field(Common.STATUS) int status);
+    @FormUrlEncoded
+    @POST(Common.WEB_API)
+    Call<List<Person>> getPersonFromSexAndBlood(@Field(Common.CONTROLLER) String controller,
+                                                @Field(Common.ACTION) String action,
+                                                @Field(Common.SEX) String sex,
+                                                @Field(Common.BLOOD) int blood,
+                                                @Field(Common.DATE_REGISTER) String date_register);
 
+    //get Person from sex
+    @FormUrlEncoded
+    @POST(Common.WEB_API)
+    Call<List<Person>> getPersonFromSex(@Field(Common.CONTROLLER) String controller,
+                                        @Field(Common.ACTION) String action,
+                                        @Field(Common.SEX) String sex,
+                                        @Field(Common.STATUS) int status);
+    @FormUrlEncoded
+    @POST(Common.WEB_API)
+    Call<List<Person>> getPersonFromSex(@Field(Common.CONTROLLER) String controller,
+                                        @Field(Common.ACTION) String action,
+                                        @Field(Common.SEX) String sex,
+                                        @Field(Common.DATE_REGISTER) String date_register);
+
+    //update Image person
+    @FormUrlEncoded
+    @POST(Common.WEB_API)
+    Call<Message> updateImagePerson(@Field(Common.CONTROLLER) String controller,
+                                    @Field(Common.ACTION) String action,
+                                    @Field(Common.KEY) String key,
+                                    @Field(Common.DATAIMAGE) String data_image,
+                                    @Field(Common.ID) int id);
 
 
     //===================== UPLOAD IMAGE ============================

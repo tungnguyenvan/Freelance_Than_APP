@@ -34,6 +34,9 @@ import com.dev.nguyenvantung.freelance_than.View.Home.Fragment.Wait.WaitFragment
 import com.dev.nguyenvantung.freelance_than.View.ShowAll.ShowAllActivity;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,8 +46,8 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
     private static final String TAG = "PersonVewholder";
     private Person person;
     private View view;
-    private ImageView item_more, item_call;
-    private TextView txt_name, txt_id, blood, status, txt_register, txt_agress, txt_paper, txt_birthday;
+    private ImageView item_call, item_edit, img_sex, item_delete;
+    private TextView txt_name, txt_id, blood, status, txt_agress, txt_paper, txt_birthday, txt_address;
     private ProgressDialog progressDialog;
     private RelativeLayout item_layout;
 
@@ -109,32 +112,40 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
         txt_id    = view.findViewById(R.id.txt_id);
         txt_name  = view.findViewById(R.id.txt_name);
         item_call = view.findViewById(R.id.item_call);
-        blood     = view.findViewById(R.id.blood);
-        item_more = view.findViewById(R.id.item_more);
         item_layout= view.findViewById(R.id.item_layout);
         status = view.findViewById(R.id.status);
-        txt_register = view.findViewById(R.id.txt_register);
         txt_agress = view.findViewById(R.id.txt_agress);
         txt_paper = view.findViewById(R.id.txt_paper);
         txt_birthday = view.findViewById(R.id.txt_birthday);
+        item_edit = view.findViewById(R.id.item_edit);
+        blood = view.findViewById(R.id.blood);
+        txt_address = view.findViewById(R.id.txt_address);
+        img_sex = view.findViewById(R.id.img_sex);
+        item_delete = view.findViewById(R.id.item_delete);
     }
 
     private void addData() {
         txt_name.setText(person.getName());
-        txt_register.setText("DK: " + person.getDateRegister());
+        txt_address.setText(person.getAddress());
 
-        if (Integer.parseInt(person.getStatus()) == 2){
-            status.setText("Đã kích hoạt");
-            status.setTextColor(Color.GREEN);
-        }else if (Integer.parseInt(person.getStatus()) == 1){
-            status.setText("Chờ");
-            status.setTextColor(Color.BLUE);
-        }else if (Integer.parseInt(person.getStatus()) == 0){
-            status.setText("Chưa kích hoạt");
-            status.setTextColor(Color.RED);
-        }
+//
+//        if (Integer.parseInt(person.getStatus()) == 2){
+//            status.setText("Đã kích hoạt");
+//            status.setTextColor(Color.GREEN);
+//        }else if (Integer.parseInt(person.getStatus()) == 1){
+//            status.setText("Chờ");
+//            status.setTextColor(Color.BLUE);
+//        }else if (Integer.parseInt(person.getStatus()) == 0){
+//            status.setText("Chưa kích hoạt");
+//            status.setTextColor(Color.RED);
+//        }
 
         txt_id.setText(person.getId());
+
+//        if (person.getSex().equals("Nam")) img_sex.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_man));
+//        else img_sex.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_girl));
+        if (person.getSex().equals("Nam")) img_sex.setImageResource(R.drawable.ic_man);
+        else img_sex.setImageResource(R.drawable.ic_girl);
 
         if (Integer.parseInt(person.getBlood()) == 1){
             blood.setText("O");
@@ -144,23 +155,25 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
             blood.setText("B");
         }else if (Integer.parseInt(person.getBlood()) == 4){
             blood.setText("AB");
-        }else if (Integer.parseInt(person.getBlood()) == 5){
+        }else if (Integer.parseInt(person.getBlood()) == 0){
             blood.setText("Chưa biết");
         }
 //
+        txt_agress.setText("Cho phép: ");
         if (Integer.parseInt(person.getArgee()) == 1){
-            txt_agress.setText("Bố hoặc mẹ");
-        }else if (Integer.parseInt(person.getArgee()) == 1){
-            txt_agress.setText("Vợ");
-        }else if (Integer.parseInt(person.getArgee()) == 1){
-            txt_agress.setText("Không có");
+            txt_agress.append("Bố hoặc mẹ");
+        }else if (Integer.parseInt(person.getArgee()) == 2){
+            txt_agress.append("Vợ");
+        }else if (Integer.parseInt(person.getArgee()) == 0){
+            txt_agress.append("Không có");
         }
 
         txt_birthday.setText("NS: " + person.getBirthday());
 //        cmnd.setText(person.getCMND());
 //        address.setText(person.getAddress());
 //        desc.setText(person.getDescription());
-        txt_paper.setText("thiếu: ");
+        txt_paper.setText("Thiếu: ");
+        txt_paper.setText("Thiếu: ");
         if (person.getCMND().equals("")) txt_paper.append("CMND, ");
         if (person.getsHK().equals("")) txt_paper.append("SHK, ");
         if (person.getxNDS().equals("")) txt_paper.append("XNDS, ");
@@ -171,8 +184,9 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
 
     private void addEvents() {
         item_call.setOnClickListener(this);
-        item_more.setOnClickListener(this);
         item_layout.setOnClickListener(this);
+        item_edit.setOnClickListener(this);
+        item_delete.setOnClickListener(this);
     }
 
     @Override
@@ -181,11 +195,14 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
             case R.id.item_call:
                 ShowContextCall();
                 break;
-            case R.id.item_more:
-                ShowContextMenu();
-                break;
             case R.id.item_layout:
                 ShowAll();
+                break;
+            case R.id.item_edit:
+                EditPerson();
+                break;
+            case R.id.item_delete:
+                ShowAlerDialog();
                 break;
         }
     }
@@ -201,6 +218,9 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
                         OpenPhone(person.getPhone());
                         break;
                     case R.id.coppy:
+                        Coppy(person.getPhone());
+                        break;
+                    case R.id.coppy_zalo:
                         Coppy(person.getZalo());
                         break;
                 }
@@ -210,9 +230,9 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
         popupMenu.show();
     }
 
-    private void Coppy(String zalo) {
+    private void Coppy(String phone) {
         ClipboardManager _clipboard = (ClipboardManager) view.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-        _clipboard.setText(zalo);
+        _clipboard.setText(phone);
         Toast.makeText(view.getContext(), "Sao chép thành công", Toast.LENGTH_SHORT).show();
     }
 
@@ -224,37 +244,37 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
         if (notActivedFragmentView != null) notActivedFragmentView.showAll(person);
     }
 
-    private void ShowContextMenu() {
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), item_more);
-        popupMenu.getMenuInflater().inflate(R.menu.popup_menu_cart, popupMenu.getMenu());
-        if (Integer.parseInt(person.getStatus()) == 1) popupMenu.getMenu().getItem(0).setEnabled(false);
-        if (Integer.parseInt(person.getStatus()) > 1){
-            popupMenu.getMenu().getItem(0).setEnabled(false);
-            popupMenu.getMenu().getItem(1).setEnabled(false);
-        }
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.popup_edit:
-                        EditPerson();
-                        break;
-                    case R.id.popup_delete:
-                        ShowAlerDialog();
-                        break;
-                    case R.id.popup_active:
-                        ShowAlerActive("Kích hoạt", "Bạn có muốn chuyển người này sang thành công không?", 2);
-                        break;
-                    case R.id.popup_wait:
-                        ShowAlerActive("Kích hoạt", "Bạn có muốn chuyển người sang chờ không?", 1);
-                        break;
-                }
-
-                return false;
-            }
-        });
-        popupMenu.show();
-    }
+//    private void ShowContextMenu() {
+//        PopupMenu popupMenu = new PopupMenu(view.getContext(), item_more);
+//        popupMenu.getMenuInflater().inflate(R.menu.popup_menu_cart, popupMenu.getMenu());
+//        if (Integer.parseInt(person.getStatus()) == 1) popupMenu.getMenu().getItem(0).setEnabled(false);
+//        if (Integer.parseInt(person.getStatus()) > 1){
+//            popupMenu.getMenu().getItem(0).setEnabled(false);
+//            popupMenu.getMenu().getItem(1).setEnabled(false);
+//        }
+//        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                switch (item.getItemId()){
+//                    case R.id.popup_edit:
+//                        EditPerson();
+//                        break;
+//                    case R.id.popup_delete:
+//                        ShowAlerDialog();
+//                        break;
+//                    case R.id.popup_active:
+//                        ShowAlerActive("Kích hoạt", "Bạn có muốn chuyển người này sang thành công không?", 2);
+//                        break;
+//                    case R.id.popup_wait:
+//                        ShowAlerActive("Kích hoạt", "Bạn có muốn chuyển người sang chờ không?", 1);
+//                        break;
+//                }
+//
+//                return false;
+//            }
+//        });
+//        popupMenu.show();
+//    }
 
     private void ActivePerson(int status) {
         Call<Message> callback = Common.DATA_CLIENT.activePerson(Common.CONTROLLER_PERSON,

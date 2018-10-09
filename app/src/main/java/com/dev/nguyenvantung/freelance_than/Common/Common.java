@@ -3,9 +3,10 @@ package com.dev.nguyenvantung.freelance_than.Common;
 import com.dev.nguyenvantung.freelance_than.Retrofit.DataClient;
 
 public class Common {
-    public static final String HOST = "http://192.168.1.13/";
-//    public static final String HOST = "http://192.168.0.47/";
-    public static final String WEB_HOST = HOST + "mvc-develop/";
+//    public static final String HOST = "http://192.168.1.13/";
+    public static final String HOST = "http://hienthan.com/";
+    public static final String WEB_HOST = HOST + "dang-ky-hien-than/";
+//    public static final String WEB_HOST = HOST + "mvc-develop/";
     public static final String WEB_API = "api.php";
     public static final String WEB_IMAGE = WEB_HOST + "public/img/";
 
@@ -19,7 +20,7 @@ public class Common {
     public static final String ACTION = "a";
     public static final String CONTROLLER_ADMIN = "admin";
     public static final String CONTROLLER_PERSON = "Person";
-    public static final String CONTROLLER_UPLOADIMAGE = "UploadImage";
+    public static final String CONTROLLER_UPLOADIMAGE = "Up";
 
 
     //action
@@ -32,6 +33,10 @@ public class Common {
     public static final String ACTION_ORDERBY_PERSON = "oderByPerson";
     public static final String ACTION_UPLOADIMAGE = "uploadImage";
     public static final String ACTION_UPDATE_PERSON = "updatePerson";
+    public static final String ACTION_GET_PERSON_FROM_BLOOD_SEX = "getPersonFromSexAndBlood";
+    public static final String ACTION_GET_PERSON_FROM_SEX = "getPersonFromSex";
+    public static final String ACTION_UPDATE_IMAGE_PERSON = "updateImagePerson";
+    public static final String ACTION_UPDATE_TOKEN = "updateToken";
 
     //request to server
     public static final String USER_NAME = "user_name";
@@ -41,7 +46,16 @@ public class Common {
     public static final String STATUS = "status";
     public static final String FIND = "find";
     public static final String BLOOD = "blood";
+    public static final String SEX = "sex";
+    public static final String KEY = "key";
+    public static final String DATAIMAGE = "data_image";
+    public static final String TOKEN = "token";
 
+    //share preference
+    public static final String PREFERENCES_LOGIN = "LOGIN";
+    public static final String PREFERENCE_SIGNED = "PREFERENCE_SIGNED";
+    public static final String PREFERENCES_LOGIN_USERNAME = "LOGIN_USERNAME";
+    public static final String PREFERENCES_LOGIN_PASSWORD = "LOGIN_PASSWORD";
 
 
     //retrofit

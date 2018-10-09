@@ -22,28 +22,11 @@
 
             <TextView
                 android:id="@+id/txt_id"
-                android:textSize="18sp"
+                android:drawableLeft="@drawable/ic_contact"
+                android:textSize="32sp"
                 android:textStyle="bold"
                 android:text="ID: "
                 android:textColor="#FF0000"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/txt_name"
-                android:text="Họ tên: "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_marginTop="@dimen/margin_8"
-                android:id="@+id/blood"
-                android:padding="3dp"
-                android:textSize="12sp"
-                android:textColor="#ffff"
-                android:text="AB"
-                android:background="#FF0000"
-                android:layout_toRightOf="@id/txt_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -52,27 +35,75 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/txt_register"
-                    android:layout_marginTop="@dimen/margin_8"
+                <ImageView
+                    android:id="@+id/img_sex"
+                    android:src="@drawable/ic_girl"
+                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
                 <TextView
-                    android:id="@+id/txt_agress"
+                    android:id="@+id/txt_name"
+                    android:textSize="18sp"
                     android:layout_marginLeft="@dimen/margin_8"
-                    android:layout_marginTop="@dimen/margin_8"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBlack"
+                    android:text="Họ tên: "
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
+
             <TextView
-                android:id="@+id/txt_birthday"
+                android:layout_marginTop="@dimen/margin_8"
+                android:id="@+id/blood"
+                android:drawableLeft="@drawable/ic_blood"
+                android:padding="3dp"
+                android:textSize="12sp"
+                android:text="AB"
+                android:textStyle="bold"
+                android:textColor="#FF0000"
+                android:layout_toRightOf="@id/txt_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txt_birthday"
+                    android:drawableLeft="@drawable/ic_calenda"
+                    android:textColor="@color/colorBlack"
+                    android:text="13/13/"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txt_address"
+                    android:drawableLeft="@drawable/ic_location"
+                    android:textColor="@color/colorBlack"
+                    android:text="hue"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txt_agress"
+                android:textColor="@color/colorBlack"
+                android:drawableLeft="@drawable/ic_agress"
                 android:layout_marginTop="@dimen/margin_8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/txt_paper"
+                android:textColor="@color/colorBlack"
+                android:drawableLeft="@drawable/ic_paper"
                 android:layout_marginTop="@dimen/margin_8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -83,27 +114,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <ImageView
-                android:id="@+id/item_call"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_call_24dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="8dp"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/item_call"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_call"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/item_edit"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/item_delete"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/item_more"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackground"
-            android:layout_alignParentRight="true"
-            android:padding="8dp"
-            android:src="@drawable/ic_more_vert_24dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

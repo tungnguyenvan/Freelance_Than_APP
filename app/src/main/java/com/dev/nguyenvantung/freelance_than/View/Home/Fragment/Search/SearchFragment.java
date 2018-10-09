@@ -122,6 +122,7 @@ public class SearchFragment extends Fragment implements TextWatcher, ViewSearchF
     //get person
     @Override
     public void getPersonSuccess(List<Person> list) {
+        this.personList.clear();
         search_progressbar.setVisibility(View.GONE);
         personList.addAll(list);
         adapter.notifyDataSetChanged();

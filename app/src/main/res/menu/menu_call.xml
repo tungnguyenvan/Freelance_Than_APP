@@ -6,5 +6,7 @@
 
     <item android:title="Sao chép"
         android:id="@+id/coppy"/>
+    <item android:title="Sao chép Zalo"
+        android:id="@+id/coppy_zalo"/>
 
 </menu>

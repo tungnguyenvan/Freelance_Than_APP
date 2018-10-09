@@ -52,12 +52,13 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private static final int REQUEST_PERMISSION_READ_EX = 10;
     private static final int REQUEST_PERMISSION_READ_CONTACT = 11;
     private static final int REQUEST_CONTACT = 12;
-    private EditText edit_name, edit_phone, edit_zalo, edit_job, edit_birthday, edit_cmnd, edit_scription, edit_address;
-    private TextView edit_id;
+    private EditText edit_name, edit_phone, edit_zalo, edit_job, edit_birthday, edit_cmnd, edit_scription, edit_address,
+            edit_height, edit_weight;
+    private TextView edit_id, edit_date_register;
     private Button btn_shk, btn_xnds, btn_gks, btn_gkh, btn_khac1, btn_khac2, btn_khac3, btn_khac4, btn_khac5;
     private ImageView img_shk, img_xnds, img_gks, img_gkh, edit_btn_opencontact, img_khac1, img_khac2,
             img_khac3, img_khac4, img_khac5;
-    private Spinner snp_agress, edit_blood, edit_status;
+    private Spinner snp_agress, edit_blood, edit_status, snp_sex;
     private ProgressDialog progressDialog;
     private Button update_info;
 
@@ -70,6 +71,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private Person person;
     private List<String> listBlood;
     private List<String> listAgress;
+    private List<String> listSex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +101,14 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         edit_cmnd = findViewById(R.id.edit_cmnd);
         edit_scription = findViewById(R.id.edit_scription);
         edit_btn_opencontact = findViewById(R.id.edit_btn_opencontact);
+        edit_height = findViewById(R.id.edit_height);
+        edit_weight = findViewById(R.id.edit_weight);
+        edit_date_register = findViewById(R.id.edit_date_register);
 
         edit_address = findViewById(R.id.snp_address);
         snp_agress = findViewById(R.id.snp_agress);
         edit_blood = findViewById(R.id.edit_blood);
+        snp_sex = findViewById(R.id.snp_sex);
 
         btn_shk = findViewById(R.id.btn_shk);
         img_shk = findViewById(R.id.img_shk);
@@ -138,6 +144,11 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         edit_scription.setText(person.getDescription());
         edit_cmnd.setText(person.getCMND());
         edit_address.setText(person.getAddress());
+        edit_height.setText(person.getHeight());
+        edit_weight.setText(person.getWeight());
+
+        String[] arrDateRegister = person.getDateRegister().split("-");
+        edit_date_register.setText(arrDateRegister[2] + " - " + arrDateRegister[1] + " - " + arrDateRegister[0]);
 
 
         ArrayAdapter<String> adapter_agress = new ArrayAdapter<>
@@ -154,6 +165,14 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         edit_blood.setSelection(Integer.parseInt(person.getBlood()));
         BLOOD = Integer.parseInt(person.getBlood());
 
+        ArrayAdapter<String> adapter_sex = new ArrayAdapter<>(this,
+                android.R.layout.simple_selectable_list_item, listSex);
+        adapter_sex.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        snp_sex.setAdapter(adapter_sex);
+        if (person.getSex() != null) {
+            if (person.getSex().equals("Nam")) snp_sex.setSelection(0);
+            else snp_sex.setSelection(1);
+        }
 
         SHK = person.getsHK();
         XNDS = person.getxNDS();
@@ -241,6 +260,10 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         listAgress.add("Không có ai");
         listAgress.add("Bố hoặc mẹ");
         listAgress.add("Vợ");
+
+        listSex = new ArrayList<>();
+        listSex.add("Nam");
+        listSex.add("Nữ");
     }
 
     private void showProgressbar(String title){
@@ -310,8 +333,13 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void UpdateInfor() {
+        String sex = "";
+        if (snp_sex.getSelectedItemPosition() == 0) sex = "Nam";
+        else sex = "Nữ";
         Person newPerson = new Person(edit_id.getText().toString(),
-                edit_name.getText().toString(),
+                edit_name.getText().toString(),sex,
+                edit_height.getText().toString(),
+                edit_weight.getText().toString(),
                 edit_phone.getText().toString(),
                 edit_zalo.getText().toString(),
                 edit_job.getText().toString(),
@@ -325,6 +353,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 Common.ACTION_UPDATE_PERSON,
                 Integer.parseInt(person.getId()),
                 edit_name.getText().toString(),
+                sex, edit_height.getText().toString(),
+                edit_weight.getText().toString(),
                 edit_phone.getText().toString(),
                 edit_zalo.getText().toString(),
                 edit_job.getText().toString(),
@@ -463,25 +493,70 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onResponse(Call<Message> call, Response<Message> response) {
                 Log.d(TAG, response.body().getMessage().toString());
-                if (response.body().getMessage()) {
-                    Picasso.get().load(Common.WEB_IMAGE + finalFile_path).resize(350, 350).centerCrop().into(imageView);
+                if (response.body().getMessage().toString().equals("true")) {
+                    Picasso.get().load(Common.WEB_IMAGE + finalFile_path).into(imageView);
+//                    UpdatePersonImage(imageView,finalFile_path);
                     Toast.makeText(EditActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
                 }else
-                    Toast.makeText(EditActivity.this, "Upload that bai, thu lai", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditActivity.this, "Upload Thất bại, Thử lại", Toast.LENGTH_SHORT).show();
 
                 dimissProgressbar();
+//
+//                try {
+//                    Log.d(TAG, response.body().string());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
             }
 
             @Override
             public void onFailure(Call<Message> call, Throwable t) {
                 Log.e(TAG, t.getLocalizedMessage());
-                Toast.makeText(EditActivity.this, "Upload that bai, thu lai", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditActivity.this, "Upload that bai, thử lai", Toast.LENGTH_SHORT).show();
                 dimissProgressbar();
             }
         });
 
         return finalFile_path;
     }
+
+//    private void UpdatePersonImage(ImageView imageView, String finalFile_path) {
+//        String key = "";
+//        switch (imageView.getId()){
+//            case R.id.SHK: key = "SHK"; break;
+//            case R.id.XNDS: key = "XNDS"; break;
+//            case R.id.GKS: key = "GKS"; break;
+//            case R.id.GKH: key = "GKH"; break;
+//            case R.id.img_khac1: key = "khac1"; break;
+//            case R.id.img_khac2: key = "khac2"; break;
+//            case R.id.img_khac3: key = "khac3"; break;
+//            case R.id.img_khac4: key = "khac4"; break;
+//            case R.id.img_khac5: key = "khac5"; break;
+//        }
+
+//        Call<Message> call = Common.DATA_CLIENT.updateImagePerson(Common.CONTROLLER_PERSON,
+//                Common.ACTION_UPDATE_IMAGE_PERSON,
+//                key, finalFile_path, Integer.parseInt(person.getId()));
+//        call.enqueue(new Callback<Message>() {
+//            @Override
+//            public void onResponse(Call<Message> call, Response<Message> response) {
+//                if (response.body().getMessage() == true)
+//                    Toast.makeText(EditActivity.this, "Thành công", Toast.LENGTH_SHORT).show();
+//                else Toast.makeText(EditActivity.this, "Upload that bai, thử lai", Toast.LENGTH_SHORT).show();
+////
+////                try {
+////                    Log.d(TAG, response.body().string());
+////                } catch (IOException e) {
+////                    e.printStackTrace();
+////                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Message> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
 
     public String getRealPathFromUri(Uri contentUri){

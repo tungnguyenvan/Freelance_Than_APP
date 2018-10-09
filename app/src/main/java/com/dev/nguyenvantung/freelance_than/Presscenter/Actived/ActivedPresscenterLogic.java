@@ -65,4 +65,50 @@ public class ActivedPresscenterLogic implements ActivedPresscenterIMP {
             }
         });
     }
+
+    @Override
+    public void getPersonFromSexAndBlood(String sex, int blood, int status) {
+        Call<List<Person>> call = Common.DATA_CLIENT.getPersonFromSexAndBlood(Common.CONTROLLER_PERSON,
+                Common.ACTION_GET_PERSON_FROM_BLOOD_SEX, sex, blood, status);
+        call.enqueue(new Callback<List<Person>>() {
+            @Override
+            public void onResponse(Call<List<Person>> call, Response<List<Person>> response) {
+                if (response.body().size() > 0){
+                    activeFragment.sortSuccess();
+                    Log.d(TAG, response.body().get(0).getAddress());
+                    activeFragment.getDataSuccess(response.body());
+                }else {
+                    activeFragment.getDataFail();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Person>> call, Throwable t) {
+                Log.e(TAG, t.getLocalizedMessage());
+            }
+        });
+    }
+
+    @Override
+    public void getPersonFromSex(String sex, int status) {
+        Call<List<Person>> call = Common.DATA_CLIENT.getPersonFromSex(Common.CONTROLLER_PERSON,
+                Common.ACTION_GET_PERSON_FROM_SEX, sex, status);
+        call.enqueue(new Callback<List<Person>>() {
+            @Override
+            public void onResponse(Call<List<Person>> call, Response<List<Person>> response) {
+                if (response.body().size() > 0){
+                    activeFragment.sortSuccess();
+                    Log.d(TAG, response.body().get(0).getAddress());
+                    activeFragment.getDataSuccess(response.body());
+                }else {
+                    activeFragment.getDataFail();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Person>> call, Throwable t) {
+                Log.e(TAG, t.getLocalizedMessage());
+            }
+        });
+    }
 }

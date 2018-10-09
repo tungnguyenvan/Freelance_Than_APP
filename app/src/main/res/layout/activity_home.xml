@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
     </FrameLayout>
 
-    <android.support.design.widget.BottomNavigationView
+    <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
         android:id="@+id/bottom_bar"
         android:elevation="8dp"
         android:scrollbars="vertical"
@@ -22,15 +22,24 @@
         app:itemTextAppearanceActive="@color/colorAccent"
         app:itemHorizontalTranslationEnabled="false"
         android:verticalScrollbarPosition="defaultPosition"
+        android:background="@drawable/background_bottom_nav"
         app:itemIconTint="@color/colorAccent"
         app:itemTextColor="@color/colorAccent"
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="56dp">
-        <View
-            android:background="@color/colorAccent"
-            android:layout_width="match_parent"
-            android:layout_height="0.3dp"/>
-    </android.support.design.widget.BottomNavigationView>
+        android:layout_height="56dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fb_logout"
+        android:elevation="10dp"
+        android:src="@drawable/ic_subdirectory_arrow_left_black_24dp"
+        android:backgroundTint="@color/colorWhite"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/margin_8"
+        android:layout_marginRight="@dimen/margin_8"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="65dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="Mới nhất"
-        android:icon="@drawable/ic_access_time_24dp"
+        android:icon="@drawable/ic_new"
         android:id="@+id/bottom_new"/>
 
     <item android:title="Tìm kiếm"
@@ -9,14 +9,14 @@
         android:id="@+id/bottom_search"/>
 
     <item android:title="Chưa active"
-        android:icon="@drawable/ic_call_to_action_24dp"
+        android:icon="@drawable/ic_progress"
         android:id="@+id/bottom_not_active"/>
 
     <item android:title="Chờ"
         android:id="@+id/bottom_wait"
-        android:icon="@drawable/ic_sort_24dp"/>
+        android:icon="@drawable/ic_wait"/>
 
     <item android:title="Đã active"
-        android:icon="@drawable/ic_import_contacts_24dp"
+        android:icon="@drawable/ic_success"
         android:id="@+id/bottom_actived"/>
 </menu>

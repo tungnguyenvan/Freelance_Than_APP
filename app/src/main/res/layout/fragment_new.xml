@@ -10,7 +10,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="56dp">
-        <Toolbar
+        <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:targetApi="lollipop">
@@ -19,11 +19,12 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                     android:id="@+id/new_txt_title"
+                    android:textColor="#fff"
+                    android:id="@+id/new_txt_title"
                     android:textSize="16sp"
                     android:gravity="center"
-                      android:layout_width="match_parent"
-                     android:layout_height="match_parent" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
                 <ImageView
                     android:id="@+id/new_btn_timer"
@@ -38,14 +39,31 @@
                     android:focusable="true"
                     android:padding="8dp"
                     android:src="@drawable/ic_access_time_24dp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.3dp"
-                    android:background="@color/colorAccent" />
             </RelativeLayout>
-        </Toolbar>
+        </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/margin_8"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Spinner
+            android:id="@+id/new_spinner"
+            android:layout_weight="1"
+            android:background="@drawable/bg_spinner"
+            android:layout_marginLeft="@dimen/margin_8"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"/>
+
+        <Spinner
+            android:id="@+id/new_snp_sex"
+            android:layout_weight="1"
+            android:background="@drawable/bg_spinner"
+            android:layout_marginLeft="@dimen/margin_8"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"/>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
