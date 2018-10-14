@@ -128,17 +128,19 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
         txt_name.setText(person.getName());
         txt_address.setText(person.getAddress());
 
-//
-//        if (Integer.parseInt(person.getStatus()) == 2){
-//            status.setText("Đã kích hoạt");
-//            status.setTextColor(Color.GREEN);
-//        }else if (Integer.parseInt(person.getStatus()) == 1){
-//            status.setText("Chờ");
-//            status.setTextColor(Color.BLUE);
-//        }else if (Integer.parseInt(person.getStatus()) == 0){
-//            status.setText("Chưa kích hoạt");
-//            status.setTextColor(Color.RED);
-//        }
+
+        if (Integer.parseInt(person.getStatus()) == 2){
+            status.setText("Đã kích hoạt");
+            status.setTextColor(Color.GREEN);
+        }else if (Integer.parseInt(person.getStatus()) == 1){
+            status.setText("Chờ");
+            status.setTextColor(Color.BLUE);
+        }else if (Integer.parseInt(person.getStatus()) == 0){
+            status.setText("Chưa kích hoạt");
+            status.setTextColor(Color.RED);
+        }else if (Integer.parseInt(person.getStatus()) == -1){
+            status.setText("Mới đăng ký");
+        }
 
         txt_id.setText(person.getId());
 

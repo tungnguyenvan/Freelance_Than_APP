@@ -110,6 +110,7 @@
 
             <TextView
                 android:id="@+id/status"
+                android:textColor="@color/colorBlack"
                 android:layout_marginTop="@dimen/margin_8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
