@@ -1,9 +1,12 @@
 package com.dev.nguyenvantung.freelance_than.View.Splash;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
                 NextPage(HomeActivity.class);
             }
         }else {
-            Toast.makeText(this, "You need turn on Network and restart app", Toast.LENGTH_SHORT).show();
+            notNetworkDialog();
         }
     }
 
@@ -52,5 +55,22 @@ public class SplashActivity extends AppCompatActivity {
     private boolean isNetWorkAvailable(Context context){
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
+    }
+
+    private void notNetworkDialog(){
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        }else {
+            builder = new AlertDialog.Builder(this);
+        }
+        builder.setTitle("Not network")
+                .setMessage("Turn on network and restart this app")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).show();
     }
 }
