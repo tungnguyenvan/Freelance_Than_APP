@@ -3,6 +3,7 @@ package com.dev.nguyenvantung.freelance_than.View.Splash;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,13 +29,17 @@ public class SplashActivity extends AppCompatActivity {
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Refreshed token: " + refreshedToken);
 
-        Common.DATA_CLIENT = APIUtils.getData();
+        if (isNetWorkAvailable(this)) {
+            Common.DATA_CLIENT = APIUtils.getData();
 
-        SharedPreferences sharedPreferences = getSharedPreferences(Common.PREFERENCES_LOGIN, Context.MODE_PRIVATE);
-        if (!sharedPreferences.getBoolean(Common.PREFERENCE_SIGNED, false)){
-            NextPage(LoginActivity.class);
+            SharedPreferences sharedPreferences = getSharedPreferences(Common.PREFERENCES_LOGIN, Context.MODE_PRIVATE);
+            if (!sharedPreferences.getBoolean(Common.PREFERENCE_SIGNED, false)) {
+                NextPage(LoginActivity.class);
+            } else {
+                NextPage(HomeActivity.class);
+            }
         }else {
-            NextPage(HomeActivity.class);
+            Toast.makeText(this, "You need turn on Network and restart app", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -42,5 +47,10 @@ public class SplashActivity extends AppCompatActivity {
         Intent intent = new Intent(this, pageClass);
         startActivity(intent);
         finish();
+    }
+
+    private boolean isNetWorkAvailable(Context context){
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
     }
 }
