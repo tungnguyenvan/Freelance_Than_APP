@@ -28,6 +28,7 @@ import com.dev.nguyenvantung.freelance_than.Common.Common;
 import com.dev.nguyenvantung.freelance_than.Model.Person;
 import com.dev.nguyenvantung.freelance_than.Presscenter.New.NewPresscenterLogic;
 import com.dev.nguyenvantung.freelance_than.R;
+import com.dev.nguyenvantung.freelance_than.View.BottomSheet.StatisticalBottomSheet;
 import com.dev.nguyenvantung.freelance_than.View.Edit.EditActivity;
 import com.dev.nguyenvantung.freelance_than.View.Home.Fragment.HomeView;
 import com.dev.nguyenvantung.freelance_than.View.ShowAll.ShowAllActivity;
@@ -46,11 +47,13 @@ public class NewFragment extends Fragment implements ViewNewFragment, View.OnCli
     private static final int REQUESTCODE_SHOW_PERSON = 13;
     private View view;
     private ImageView new_btn_timer;
+    private ImageView new_btn_statiscal;
     private TextView new_txt_title;
     private RecyclerView new_recyclerview;
     private ProgressBar new_progressbar;
     private SwipeRefreshLayout new_swipe;
     private Spinner new_spinner, new_snp_sex;
+    private StatisticalBottomSheet b;
 
     private HomeView homeView;
 
@@ -114,6 +117,7 @@ public class NewFragment extends Fragment implements ViewNewFragment, View.OnCli
     private void addControlls() {
         new_swipe     = view.findViewById(R.id.new_swipe);
         new_btn_timer = view.findViewById(R.id.new_btn_timer);
+        new_btn_statiscal = view.findViewById(R.id.new_btn_statiscal);
         new_txt_title = view.findViewById(R.id.new_txt_title);
         String[] arrDay = dateQuery.split("/");
         new_txt_title.setText(arrDay[2] + "/" + arrDay[1] + "/" + arrDay[0]);
@@ -187,6 +191,8 @@ public class NewFragment extends Fragment implements ViewNewFragment, View.OnCli
 
             }
         });
+
+        new_btn_statiscal.setOnClickListener(this);
     }
 
     private void getPersonSex() {
@@ -217,6 +223,11 @@ public class NewFragment extends Fragment implements ViewNewFragment, View.OnCli
         switch (v.getId()) {
             case R.id.new_btn_timer:
                 datePickerDialog.show();
+                break;
+            case R.id.new_btn_statiscal:
+                b = new StatisticalBottomSheet();
+                b.setTypeStatistical(-1);
+                b.show(getFragmentManager(), NewFragment.TAG);
                 break;
         }
     }

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:translationZ="@dimen/margin_8"
+    android:padding="@dimen/margin_8"
+    android:layout_margin="@dimen/margin_8"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:paddingTop="@dimen/margin_8"
+        android:paddingRight="@dimen/margin_8"
+        android:paddingLeft="@dimen/margin_8"
+        android:paddingBottom="32dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/bottom.sheet.progressbar"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:indeterminate="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:background="@color/design_default_color_primary"
+            android:id="@+id/bottom.sheet.title"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="@color/colorWhite"
+            android:text="Thống kê"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/bottom.sheet.layout.all"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginTop="@dimen/margin_8"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/bottom.sheet.entry.total"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:textColor="@color/colorBlack"
+                android:text="Tổng số:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/bottom.sheet.totalall"
+                android:layout_toRightOf="@+id/bottom.sheet.entry.total"
+                android:textStyle="bold"
+                android:textSize="32sp"
+                android:layout_marginLeft="16dp"
+                android:textColor="@color/colorBlack"
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <View
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/colorAccent"
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"/>
+
+        <TextView
+            android:background="@color/design_default_color_primary"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="@color/colorWhite"
+            android:text="Thống kê theo ngày"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:padding="@dimen/margin_8"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:background="@drawable/background_statistical"
+                android:id="@+id/bottom.sheet.from"
+                android:text="12/12/12"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:layout_marginLeft="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_8"
+                android:text=":"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/bottom.sheet.to"
+                android:background="@drawable/background_statistical"
+                android:text="12/12/12"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/bottom.sheet.see"
+                android:text="Lọc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/bottom.sheet.layout.statistical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/bottom.sheet.statistical"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:textSize="24sp"
+                android:text="Số lượng:"
+                android:layout_marginLeft="@dimen/margin_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/bottom.sheet.total"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/bottom.sheet.statistical"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:textSize="24sp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

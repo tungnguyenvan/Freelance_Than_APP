@@ -32,6 +32,7 @@ import com.dev.nguyenvantung.freelance_than.View.Home.Fragment.NotActived.NotAct
 import com.dev.nguyenvantung.freelance_than.View.Home.Fragment.Search.ViewSearchFragment;
 import com.dev.nguyenvantung.freelance_than.View.Home.Fragment.Wait.WaitFragmentView;
 import com.dev.nguyenvantung.freelance_than.View.ShowAll.ShowAllActivity;
+import com.dev.nguyenvantung.freelance_than.View.Statistical.ViewStatisticalActivity;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -56,6 +57,7 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
     private NotActivedFragmentView notActivedFragmentView;
     private ViewSearchFragment viewSearchFragment;
     private WaitFragmentView waitFragmentView;
+    private ViewStatisticalActivity viewStatisticalActivity;
 
     public PersonVewholder(@NonNull View itemView, ViewNewFragment viewNewFragment) {
         super(itemView);
@@ -89,6 +91,13 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
         this.view = itemView;
 
         this.viewSearchFragment = viewSearchFragment;
+    }
+
+    public PersonVewholder(@NonNull View itemView, ViewStatisticalActivity viewStatisticalActivity) {
+        super(itemView);
+        this.view = itemView;
+
+        this.viewStatisticalActivity = viewStatisticalActivity;
     }
 
 
@@ -177,10 +186,10 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
         txt_paper.setText("Thiếu: ");
         txt_paper.setText("Thiếu: ");
         if (person.getCMND().equals("")) txt_paper.append("CMND, ");
-        if (person.getsHK().equals("")) txt_paper.append("SHK, ");
-        if (person.getxNDS().equals("")) txt_paper.append("XNDS, ");
-        if (person.getgKS().equals("")) txt_paper.append("GKS, ");
-        if (person.getgKH().equals("")) txt_paper.append("GKH, ");
+        if (person.getSHK().equals("")) txt_paper.append("SHK, ");
+        if (person.getXNDS().equals("")) txt_paper.append("XNDS, ");
+        if (person.getGKS().equals("")) txt_paper.append("GKS, ");
+        if (person.getGKH().equals("")) txt_paper.append("GKH, ");
 
     }
 
@@ -244,6 +253,7 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
         if (waitFragmentView != null) waitFragmentView.showAll(person);
         if (viewActiveFragment != null) viewActiveFragment.showAll(person);
         if (notActivedFragmentView != null) notActivedFragmentView.showAll(person);
+        if (viewStatisticalActivity != null) viewStatisticalActivity.showAll(person);
     }
 
 //    private void ShowContextMenu() {
@@ -377,6 +387,7 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
         if (viewNewFragment != null) viewNewFragment.editPerson(person);
         if (viewSearchFragment != null) viewSearchFragment.editPerson(person);
         if (waitFragmentView != null) waitFragmentView.editPerson(person);
+        if (viewStatisticalActivity != null) viewStatisticalActivity.editPerson(person);
     }
 
     private void OpenPhone(String phone) {

@@ -4,6 +4,7 @@ import com.dev.nguyenvantung.freelance_than.Common.Common;
 import com.dev.nguyenvantung.freelance_than.Model.Admin;
 import com.dev.nguyenvantung.freelance_than.Model.Message;
 import com.dev.nguyenvantung.freelance_than.Model.Person;
+import com.dev.nguyenvantung.freelance_than.Model.Total;
 
 import java.util.List;
 
@@ -153,6 +154,31 @@ public interface DataClient {
                                     @Field(Common.KEY) String key,
                                     @Field(Common.DATAIMAGE) String data_image,
                                     @Field(Common.ID) int id);
+
+    //Get total person
+
+    @FormUrlEncoded
+    @POST(Common.WEB_API)
+    Call<Total> getTotalPersonFromStatus(@Field(Common.CONTROLLER) String controller,
+                                         @Field(Common.ACTION) String action,
+                                         @Field(Common.STATUS) int status);
+
+    @FormUrlEncoded
+    @POST(Common.WEB_API)
+    Call<Total> getTotalPerson(@Field(Common.CONTROLLER) String controller,
+                               @Field(Common.ACTION) String action,
+                               @Field(Common.STATUS) int status,
+                               @Field(Common.FROMDAY) String from_day,
+                               @Field(Common.TODAY) String to_day);
+
+    // Get person from range date
+    @FormUrlEncoded
+    @POST(Common.WEB_API)
+    Call<List<Person>> getPersonRangeDate(@Field(Common.CONTROLLER) String controller,
+                                          @Field(Common.ACTION) String action,
+                                          @Field(Common.STATUS) int status,
+                                          @Field(Common.FROMDAY) String from_day,
+                                          @Field(Common.TODAY) String to_day);
 
 
     //===================== UPLOAD IMAGE ============================

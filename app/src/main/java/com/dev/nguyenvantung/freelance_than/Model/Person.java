@@ -110,6 +110,22 @@ public class Person implements Serializable {
         this.status = status;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getSex() {
         return sex;
     }
@@ -132,102 +148,6 @@ public class Person implements Serializable {
 
     public void setWeight(String weight) {
         this.weight = weight;
-    }
-
-    public String getcMND() {
-        return cMND;
-    }
-
-    public void setcMND(String cMND) {
-        this.cMND = cMND;
-    }
-
-    public String getKhac1() {
-        return khac1;
-    }
-
-    public void setKhac1(String khac1) {
-        this.khac1 = khac1;
-    }
-
-    public String getKhac2() {
-        return khac2;
-    }
-
-    public void setKhac2(String khac2) {
-        this.khac2 = khac2;
-    }
-
-    public String getKhac3() {
-        return khac3;
-    }
-
-    public void setKhac3(String khac3) {
-        this.khac3 = khac3;
-    }
-
-    public String getKhac4() {
-        return khac4;
-    }
-
-    public void setKhac4(String khac4) {
-        this.khac4 = khac4;
-    }
-
-    public String getKhac5() {
-        return khac5;
-    }
-
-    public void setKhac5(String khac5) {
-        this.khac5 = khac5;
-    }
-
-    public String getsHK() {
-        return sHK;
-    }
-
-    public void setsHK(String sHK) {
-        this.sHK = sHK;
-    }
-
-    public String getxNDS() {
-        return xNDS;
-    }
-
-    public void setxNDS(String xNDS) {
-        this.xNDS = xNDS;
-    }
-
-    public String getgKS() {
-        return gKS;
-    }
-
-    public void setgKS(String gKS) {
-        this.gKS = gKS;
-    }
-
-    public String getgKH() {
-        return gKH;
-    }
-
-    public void setgKH(String gKH) {
-        this.gKH = gKH;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPhone() {
@@ -268,6 +188,78 @@ public class Person implements Serializable {
 
     public void setCMND(String cMND) {
         this.cMND = cMND;
+    }
+
+    public String getSHK() {
+        return sHK;
+    }
+
+    public void setSHK(String sHK) {
+        this.sHK = sHK;
+    }
+
+    public String getXNDS() {
+        return xNDS;
+    }
+
+    public void setXNDS(String xNDS) {
+        this.xNDS = xNDS;
+    }
+
+    public String getGKS() {
+        return gKS;
+    }
+
+    public void setGKS(String gKS) {
+        this.gKS = gKS;
+    }
+
+    public String getGKH() {
+        return gKH;
+    }
+
+    public void setGKH(String gKH) {
+        this.gKH = gKH;
+    }
+
+    public String getKhac1() {
+        return khac1;
+    }
+
+    public void setKhac1(String khac1) {
+        this.khac1 = khac1;
+    }
+
+    public String getKhac2() {
+        return khac2;
+    }
+
+    public void setKhac2(String khac2) {
+        this.khac2 = khac2;
+    }
+
+    public String getKhac3() {
+        return khac3;
+    }
+
+    public void setKhac3(String khac3) {
+        this.khac3 = khac3;
+    }
+
+    public String getKhac4() {
+        return khac4;
+    }
+
+    public void setKhac4(String khac4) {
+        this.khac4 = khac4;
+    }
+
+    public String getKhac5() {
+        return khac5;
+    }
+
+    public void setKhac5(String khac5) {
+        this.khac5 = khac5;
     }
 
     public String getAddress() {

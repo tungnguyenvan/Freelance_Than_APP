@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import com.dev.nguyenvantung.freelance_than.Common.Common;
 import com.dev.nguyenvantung.freelance_than.Model.Person;
 import com.dev.nguyenvantung.freelance_than.Presscenter.NotActived.NotActivePrescenterLogic;
 import com.dev.nguyenvantung.freelance_than.R;
+import com.dev.nguyenvantung.freelance_than.View.BottomSheet.StatisticalBottomSheet;
 import com.dev.nguyenvantung.freelance_than.View.Edit.EditActivity;
 import com.dev.nguyenvantung.freelance_than.View.Home.Fragment.HomeView;
 import com.dev.nguyenvantung.freelance_than.View.ShowAll.ShowAllActivity;
@@ -46,6 +48,7 @@ public class NotActivedFragment extends Fragment implements NotActivedFragmentVi
     private SwipeRefreshLayout not_active_swipe;
     private Button not_active_sort;
     private Spinner not_active_spinner, not_active_snp_sex;
+    private ImageView notactive_btn_statistical;
 
     private HomeView homeView;
 
@@ -108,6 +111,7 @@ public class NotActivedFragment extends Fragment implements NotActivedFragmentVi
                 android.R.layout.simple_selectable_list_item, listSex);
         adapterSex.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         not_active_snp_sex.setAdapter(adapterSex);
+        notactive_btn_statistical = view.findViewById(R.id.notactive_btn_statiscal);
     }
 
     private void initRecyclerview() {
@@ -148,6 +152,12 @@ public class NotActivedFragment extends Fragment implements NotActivedFragmentVi
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+        });
+
+        notactive_btn_statistical.setOnClickListener(v -> {
+            StatisticalBottomSheet statisticalBottomSheet = new StatisticalBottomSheet();
+            statisticalBottomSheet.setTypeStatistical(0);
+            statisticalBottomSheet.show(getFragmentManager(), TAG);
         });
     }
 

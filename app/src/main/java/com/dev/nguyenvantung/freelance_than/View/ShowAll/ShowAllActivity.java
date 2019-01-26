@@ -189,13 +189,13 @@ public class ShowAllActivity extends AppCompatActivity implements View.OnClickLi
             tt_agress.setText("Không có");
         }
 
-        Picasso.get().load(Common.WEB_IMAGE + person.getsHK()).into(SHK);
+        Picasso.get().load(Common.WEB_IMAGE + person.getSHK()).into(SHK);
 
-        Picasso.get().load(Common.WEB_IMAGE + person.getxNDS()).into(XNDS);
+        Picasso.get().load(Common.WEB_IMAGE + person.getXNDS()).into(XNDS);
 
-        Picasso.get().load(Common.WEB_IMAGE + person.getgKH()).into(GKH);
+        Picasso.get().load(Common.WEB_IMAGE + person.getGKH()).into(GKH);
 
-        Picasso.get().load(Common.WEB_IMAGE + person.getgKS()).into(GKS);
+        Picasso.get().load(Common.WEB_IMAGE + person.getGKS()).into(GKS);
 
         Picasso.get().load(Common.WEB_IMAGE + person.getKhac1()).into(show_img_khac1);
         Picasso.get().load(Common.WEB_IMAGE + person.getKhac2()).into(show_img_khac2);
@@ -220,16 +220,16 @@ public class ShowAllActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             //SHK, XNDS, GKS, GKH
             case R.id.SHK:
-                sendToViewImage(SHK, person.getsHK());
+                sendToViewImage(SHK, person.getSHK());
                 break;
             case R.id.XNDS:
-                sendToViewImage(XNDS, person.getxNDS());
+                sendToViewImage(XNDS, person.getXNDS());
                 break;
             case R.id.GKS:
-                sendToViewImage(GKS, person.getgKS());
+                sendToViewImage(GKS, person.getGKS());
                 break;
             case R.id.GKH:
-                sendToViewImage(GKH, person.getgKH());
+                sendToViewImage(GKH, person.getGKH());
                 break;
             case R.id.btn_khac1:
                 sendToViewImage(show_img_khac1, person.getKhac1());

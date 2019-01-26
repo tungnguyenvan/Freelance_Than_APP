@@ -3,10 +3,10 @@ package com.dev.nguyenvantung.freelance_than.Common;
 import com.dev.nguyenvantung.freelance_than.Retrofit.DataClient;
 
 public class Common {
-//    public static final String HOST = "http://192.168.1.13/";
+    //public static final String HOST = "http://192.168.0.124/";
     public static final String HOST = "http://hienthan.com/";
     public static final String WEB_HOST = HOST + "dang-ky-hien-than/";
-//    public static final String WEB_HOST = HOST + "mvc-develop/";
+    //public static final String WEB_HOST = HOST + "Freelance_Than_Service/";
     public static final String WEB_API = "api.php";
     public static final String WEB_IMAGE = WEB_HOST + "public/img/";
 
@@ -37,6 +37,9 @@ public class Common {
     public static final String ACTION_GET_PERSON_FROM_SEX = "getPersonFromSex";
     public static final String ACTION_UPDATE_IMAGE_PERSON = "updateImagePerson";
     public static final String ACTION_UPDATE_TOKEN = "updateToken";
+    public static final String ACTION_GET_TOTAL_PERSON = "getTotalPerson";
+    public static final String ACTION_GET_TOTAL_ALL = "getTotalPersonFromStatus";
+    public static final String ACTION_GET_PERSON_RANGE_DATE = "getPersonRangeDate";
 
     //request to server
     public static final String USER_NAME = "user_name";
@@ -48,6 +51,8 @@ public class Common {
     public static final String BLOOD = "blood";
     public static final String SEX = "sex";
     public static final String KEY = "key";
+    public static final String FROMDAY = "from-day";
+    public static final String TODAY = "to-day";
     public static final String DATAIMAGE = "data_image";
     public static final String TOKEN = "token";
 

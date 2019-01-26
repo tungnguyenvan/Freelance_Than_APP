@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import com.dev.nguyenvantung.freelance_than.Common.Common;
 import com.dev.nguyenvantung.freelance_than.Model.Person;
 import com.dev.nguyenvantung.freelance_than.Presscenter.Wait.WaitPrescenterLogic;
 import com.dev.nguyenvantung.freelance_than.R;
+import com.dev.nguyenvantung.freelance_than.View.BottomSheet.StatisticalBottomSheet;
 import com.dev.nguyenvantung.freelance_than.View.Edit.EditActivity;
 import com.dev.nguyenvantung.freelance_than.View.Home.Fragment.HomeView;
 import com.dev.nguyenvantung.freelance_than.View.ShowAll.ShowAllActivity;
@@ -42,6 +44,7 @@ public class WaitFragment extends Fragment implements WaitFragmentView, SwipeRef
     private SwipeRefreshLayout wait_swipe;
     private ProgressBar wait_progressbar;
     private RecyclerView wait_recyclerview;
+    private ImageView wait_btn_statiscal;
 
     private HomeView homeView;
 
@@ -103,6 +106,8 @@ public class WaitFragment extends Fragment implements WaitFragmentView, SwipeRef
                 android.R.layout.simple_selectable_list_item, listSex);
         adapterSex.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         wait_snp_sex.setAdapter(adapterSex);
+
+        wait_btn_statiscal = view.findViewById(R.id.wait_btn_statiscal);
     }
 
     private void initRecyclerView() {
@@ -143,6 +148,12 @@ public class WaitFragment extends Fragment implements WaitFragmentView, SwipeRef
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+        });
+
+        wait_btn_statiscal.setOnClickListener(v -> {
+            StatisticalBottomSheet statisticalBottomSheet = new StatisticalBottomSheet();
+            statisticalBottomSheet.setTypeStatistical(1);
+            statisticalBottomSheet.show(getFragmentManager(), TAG);
         });
     }
 

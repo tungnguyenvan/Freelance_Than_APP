@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.dev.nguyenvantung.freelance_than.Common.Common;
 import com.dev.nguyenvantung.freelance_than.Model.Person;
 import com.dev.nguyenvantung.freelance_than.Presscenter.Actived.ActivedPresscenterLogic;
 import com.dev.nguyenvantung.freelance_than.R;
+import com.dev.nguyenvantung.freelance_than.View.BottomSheet.StatisticalBottomSheet;
 import com.dev.nguyenvantung.freelance_than.View.Edit.EditActivity;
 import com.dev.nguyenvantung.freelance_than.View.Home.Fragment.HomeView;
 import com.dev.nguyenvantung.freelance_than.View.ShowAll.ShowAllActivity;
@@ -42,6 +44,7 @@ public class ActivedFragment extends Fragment implements ViewActiveFragment, Swi
     private SwipeRefreshLayout active_swipe;
 //    private Button active_sort;
     private Spinner active_spinner, active_snp_sex;
+    private ImageView active_btn_statistical;
 
     private HomeView homeView;
 
@@ -104,6 +107,7 @@ public class ActivedFragment extends Fragment implements ViewActiveFragment, Swi
                 android.R.layout.simple_selectable_list_item, listSex);
         adapterSex.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         active_snp_sex.setAdapter(adapterSex);
+        active_btn_statistical = view.findViewById(R.id.active_btn_statiscal);
     }
 
     private void initRecyclerview() {
@@ -144,6 +148,12 @@ public class ActivedFragment extends Fragment implements ViewActiveFragment, Swi
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+        });
+
+        active_btn_statistical.setOnClickListener(v -> {
+            StatisticalBottomSheet statisticalBottomSheet = new StatisticalBottomSheet();
+            statisticalBottomSheet.setTypeStatistical(2);
+            statisticalBottomSheet.show(getFragmentManager(), TAG);
         });
     }
 

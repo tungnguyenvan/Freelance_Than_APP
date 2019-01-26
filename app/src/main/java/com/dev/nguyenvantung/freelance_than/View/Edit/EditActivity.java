@@ -174,10 +174,10 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             else snp_sex.setSelection(1);
         }
 
-        SHK = person.getsHK();
-        XNDS = person.getxNDS();
-        GKS = person.getgKS();
-        GKH = person.getgKH();
+        SHK = person.getSHK();
+        XNDS = person.getXNDS();
+        GKS = person.getGKS();
+        GKH = person.getGKH();
         khac1 = person.getKhac1();
         khac2 = person.getKhac2();
         khac3 = person.getKhac3();
@@ -185,16 +185,16 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         khac5 = person.getKhac5();
 
         //add data image
-        Picasso.get().load(Common.WEB_IMAGE + person.getsHK())
+        Picasso.get().load(Common.WEB_IMAGE + person.getSHK())
                 .resize(350, 350).centerCrop().into(img_shk);
 
-        Picasso.get().load(Common.WEB_IMAGE + person.getxNDS())
+        Picasso.get().load(Common.WEB_IMAGE + person.getXNDS())
                 .resize(350, 350).centerCrop().into(img_xnds);
 
-        Picasso.get().load(Common.WEB_IMAGE + person.getgKS())
+        Picasso.get().load(Common.WEB_IMAGE + person.getGKS())
                 .resize(350, 350).centerCrop().into(img_gks);
 
-        Picasso.get().load(Common.WEB_IMAGE + person.getgKH())
+        Picasso.get().load(Common.WEB_IMAGE + person.getGKH())
                 .resize(350, 350).centerCrop().into(img_gkh);
 
         Picasso.get().load(Common.WEB_IMAGE + khac1)

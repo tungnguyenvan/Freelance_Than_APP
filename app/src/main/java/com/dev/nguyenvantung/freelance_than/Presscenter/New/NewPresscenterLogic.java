@@ -38,7 +38,7 @@ public class NewPresscenterLogic implements NewPresscenterIMP {
 
             @Override
             public void onFailure(Call<List<Person>> call, Throwable t) {
-                Log.e(TAG, t.getLocalizedMessage());
+                Log.e(TAG, t.getMessage());
                 viewNewFragment.Error();
             }
         });

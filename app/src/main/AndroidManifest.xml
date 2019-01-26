@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -18,29 +18,47 @@
         android:roundIcon="@drawable/ic_lauch"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.Splash.SplashActivity" android:screenOrientation="portrait">
+        <activity android:name=".View.Statistical.StatisticalActivity"></activity>
+        <activity
+            android:name=".View.Splash.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.Login.LoginActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".View.Home.Fragment.HomeActivity" android:screenOrientation="portrait" />
-        <activity android:name=".View.ShowAll.ShowAllActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".View.Edit.EditActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".View.ViewImage.ViewImageActivity" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".View.Login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Home.Fragment.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.ShowAll.ShowAllActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Edit.EditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.ViewImage.ViewImageActivity"
+            android:screenOrientation="portrait" />
+
         <service android:name=".Service.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-            <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-     See README(https://goo.gl/l4GJaQ) for more. -->
+            <!--
+     Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+            -->
             <meta-data
                 android:name="com.google.firebase.messaging.default_notification_icon"
                 android:resource="@drawable/ic_access_time_24dp" />
-            <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-                 notification message. See README(https://goo.gl/6BKBk7) for more. -->
+            <!--
+                 Set color used with incoming notification messages. This is used when no color is set for the incoming
+                 notification message. See README(https://goo.gl/6BKBk7) for more.
+            -->
             <meta-data
                 android:name="com.google.firebase.messaging.default_notification_color"
                 android:resource="@color/colorAccent" />

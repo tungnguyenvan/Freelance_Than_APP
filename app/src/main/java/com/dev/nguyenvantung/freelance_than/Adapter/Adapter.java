@@ -14,6 +14,7 @@ import com.dev.nguyenvantung.freelance_than.View.Home.Fragment.New.ViewNewFragme
 import com.dev.nguyenvantung.freelance_than.View.Home.Fragment.NotActived.NotActivedFragment;
 import com.dev.nguyenvantung.freelance_than.View.Home.Fragment.Search.ViewSearchFragment;
 import com.dev.nguyenvantung.freelance_than.View.Home.Fragment.Wait.WaitFragmentView;
+import com.dev.nguyenvantung.freelance_than.View.Statistical.ViewStatisticalActivity;
 import com.dev.nguyenvantung.freelance_than.ViewHolder.PersonVewholder;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class Adapter extends RecyclerView.Adapter<PersonVewholder> {
     private NotActivedFragment notActivedFragment;
     private ViewSearchFragment viewSearchFragment;
     private WaitFragmentView wait_recyclerview;
+    private ViewStatisticalActivity viewStatisticalActivity;
 
 
     public Adapter(List<Person> personList, ViewNewFragment viewNewFragment){
@@ -52,6 +54,11 @@ public class Adapter extends RecyclerView.Adapter<PersonVewholder> {
         this.wait_recyclerview = wait_recyclerview;
     }
 
+    public Adapter(List<Person> personList, ViewStatisticalActivity viewStatisticalActivity){
+        this.personList = personList;
+        this.viewStatisticalActivity = viewStatisticalActivity;
+    }
+
     @NonNull
     @Override
     public PersonVewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -63,6 +70,7 @@ public class Adapter extends RecyclerView.Adapter<PersonVewholder> {
         if (notActivedFragment != null) personVewholder = new PersonVewholder(view, notActivedFragment);
         if (viewSearchFragment != null) personVewholder = new PersonVewholder(view, viewSearchFragment);
         if (wait_recyclerview != null) personVewholder = new PersonVewholder(view, wait_recyclerview);
+        if (viewStatisticalActivity != null) personVewholder = new PersonVewholder(view, viewStatisticalActivity);
             return personVewholder;
     }
 
