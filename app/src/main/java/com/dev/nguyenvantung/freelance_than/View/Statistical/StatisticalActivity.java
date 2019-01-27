@@ -59,15 +59,6 @@ public class StatisticalActivity extends AppCompatActivity implements ViewStatis
         statistical_progressbar = findViewById(R.id.statistical_progressbar);
         statistical_back = findViewById(R.id.statistical_back);
 
-        initRecyclerView();
-    }
-
-    private void getDateFromIntent() {
-        Intent i = getIntent();
-        status = i.getIntExtra(Common.STATUS, -2);
-        fromDate = i.getStringExtra(Common.FROMDAY);
-        toDate = i.getStringExtra(Common.TODAY);
-
         switch (status){
             case -1:
                 statistical_txt_title.append(" Chưa xem");
@@ -82,6 +73,15 @@ public class StatisticalActivity extends AppCompatActivity implements ViewStatis
                 statistical_txt_title.append(" Thành công");
                 break;
         }
+
+        initRecyclerView();
+    }
+
+    private void getDateFromIntent() {
+        Intent i = getIntent();
+        status = i.getIntExtra(Common.STATUS, -2);
+        fromDate = i.getStringExtra(Common.FROMDAY);
+        toDate = i.getStringExtra(Common.TODAY);
     }
 
     private void initRecyclerView() {
