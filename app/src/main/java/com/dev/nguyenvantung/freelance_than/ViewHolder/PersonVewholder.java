@@ -48,7 +48,7 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
     private Person person;
     private View view;
     private ImageView item_call, item_edit, img_sex, item_delete;
-    private TextView txt_name, txt_id, blood, status, txt_agress, txt_paper, txt_birthday, txt_address;
+    private TextView txt_name, txt_id, blood, status, txt_agress, txt_paper, txt_birthday, txt_address, txt_day;
     private ProgressDialog progressDialog;
     private RelativeLayout item_layout;
 
@@ -131,12 +131,16 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
         txt_address = view.findViewById(R.id.txt_address);
         img_sex = view.findViewById(R.id.img_sex);
         item_delete = view.findViewById(R.id.item_delete);
+        txt_day = view.findViewById(R.id.item_date);
     }
 
     private void addData() {
         txt_name.setText(person.getName());
         txt_address.setText(person.getAddress());
 
+        // txt day
+        String arrDate[] = person.getDateRegister().split("-");
+        txt_day.setText(arrDate[1] + "/" + arrDate[2]);
 
         if (Integer.parseInt(person.getStatus()) == 2){
             status.setText("Đã kích hoạt");
@@ -153,8 +157,6 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
 
         txt_id.setText(person.getId());
 
-//        if (person.getSex().equals("Nam")) img_sex.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_man));
-//        else img_sex.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_girl));
         if (person.getSex().equals("Nam")) img_sex.setImageResource(R.drawable.ic_man);
         else img_sex.setImageResource(R.drawable.ic_girl);
 
@@ -180,9 +182,6 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
         }
 
         txt_birthday.setText("NS: " + person.getBirthday());
-//        cmnd.setText(person.getCMND());
-//        address.setText(person.getAddress());
-//        desc.setText(person.getDescription());
         txt_paper.setText("Thiếu: ");
         txt_paper.setText("Thiếu: ");
         if (person.getCMND().equals("")) txt_paper.append("CMND, ");
@@ -255,38 +254,6 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
         if (notActivedFragmentView != null) notActivedFragmentView.showAll(person);
         if (viewStatisticalActivity != null) viewStatisticalActivity.showAll(person);
     }
-
-//    private void ShowContextMenu() {
-//        PopupMenu popupMenu = new PopupMenu(view.getContext(), item_more);
-//        popupMenu.getMenuInflater().inflate(R.menu.popup_menu_cart, popupMenu.getMenu());
-//        if (Integer.parseInt(person.getStatus()) == 1) popupMenu.getMenu().getItem(0).setEnabled(false);
-//        if (Integer.parseInt(person.getStatus()) > 1){
-//            popupMenu.getMenu().getItem(0).setEnabled(false);
-//            popupMenu.getMenu().getItem(1).setEnabled(false);
-//        }
-//        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                switch (item.getItemId()){
-//                    case R.id.popup_edit:
-//                        EditPerson();
-//                        break;
-//                    case R.id.popup_delete:
-//                        ShowAlerDialog();
-//                        break;
-//                    case R.id.popup_active:
-//                        ShowAlerActive("Kích hoạt", "Bạn có muốn chuyển người này sang thành công không?", 2);
-//                        break;
-//                    case R.id.popup_wait:
-//                        ShowAlerActive("Kích hoạt", "Bạn có muốn chuyển người sang chờ không?", 1);
-//                        break;
-//                }
-//
-//                return false;
-//            }
-//        });
-//        popupMenu.show();
-//    }
 
     private void ActivePerson(int status) {
         Call<Message> callback = Common.DATA_CLIENT.activePerson(Common.CONTROLLER_PERSON,
