@@ -144,15 +144,15 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
 
         if (Integer.parseInt(person.getStatus()) == 2){
             status.setText("Đã kích hoạt");
-            status.setTextColor(Color.GREEN);
+            //status.setTextColor(Color.GREEN);
         }else if (Integer.parseInt(person.getStatus()) == 1){
             status.setText("Chờ");
-            status.setTextColor(Color.BLUE);
+            //status.setTextColor(Color.BLUE);
         }else if (Integer.parseInt(person.getStatus()) == 0){
             status.setText("Chưa kích hoạt");
-            status.setTextColor(Color.RED);
+            //status.setTextColor(Color.RED);
         }else if (Integer.parseInt(person.getStatus()) == -1){
-            status.setText("Mới đăng ký");
+            status.setText("Chưa xử lý");
         }
 
         txt_id.setText(person.getId());
@@ -172,18 +172,16 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
             blood.setText("Chưa biết");
         }
 //
-        txt_agress.setText("Cho phép: ");
         if (Integer.parseInt(person.getArgee()) == 1){
-            txt_agress.append("Bố hoặc mẹ");
+            txt_agress.setText("Bố hoặc mẹ");
         }else if (Integer.parseInt(person.getArgee()) == 2){
-            txt_agress.append("Vợ");
+            txt_agress.setText("Vợ");
         }else if (Integer.parseInt(person.getArgee()) == 0){
-            txt_agress.append("Không có");
+            txt_agress.setText("Không có");
         }
 
-        txt_birthday.setText("NS: " + person.getBirthday());
-        txt_paper.setText("Thiếu: ");
-        txt_paper.setText("Thiếu: ");
+        txt_birthday.setText(person.getBirthday());
+        txt_paper.setText("");
         if (person.getCMND().equals("")) txt_paper.append("CMND, ");
         if (person.getSHK().equals("")) txt_paper.append("SHK, ");
         if (person.getXNDS().equals("")) txt_paper.append("XNDS, ");
@@ -220,22 +218,19 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
     private void ShowContextCall() {
         PopupMenu popupMenu = new PopupMenu(view.getContext(), item_call);
         popupMenu.getMenuInflater().inflate(R.menu.menu_call, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.open_phone:
-                        OpenPhone(person.getPhone());
-                        break;
-                    case R.id.coppy:
-                        Coppy(person.getPhone());
-                        break;
-                    case R.id.coppy_zalo:
-                        Coppy(person.getZalo());
-                        break;
-                }
-                return false;
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()){
+                case R.id.open_phone:
+                    OpenPhone(person.getPhone());
+                    break;
+                case R.id.coppy:
+                    Coppy(person.getPhone());
+                    break;
+                case R.id.coppy_zalo:
+                    Coppy(person.getZalo());
+                    break;
             }
+            return false;
         });
         popupMenu.show();
     }
