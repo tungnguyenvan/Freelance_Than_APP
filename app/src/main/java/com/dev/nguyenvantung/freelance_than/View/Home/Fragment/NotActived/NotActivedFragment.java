@@ -42,11 +42,13 @@ public class NotActivedFragment extends Fragment implements NotActivedFragmentVi
     private static final String TAG = "ActivedFragment";
     private static final int REQUESTCODE_EDIT_PERSON = 12;
     private static final int REQUESTCODE_SHOW_PERSON = 13;
+    private int limit = 19;
+
     private View view;
     private RecyclerView not_active_recyclerview;
     private ProgressBar not_active_progressbar;
     private SwipeRefreshLayout not_active_swipe;
-    private Button not_active_sort;
+    private Button not_active_sort, not_active_btn_more;
     private Spinner not_active_spinner, not_active_snp_sex;
     private ImageView notactive_btn_statistical;
 
@@ -112,11 +114,13 @@ public class NotActivedFragment extends Fragment implements NotActivedFragmentVi
         adapterSex.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         not_active_snp_sex.setAdapter(adapterSex);
         notactive_btn_statistical = view.findViewById(R.id.notactive_btn_statiscal);
+
+        not_active_btn_more = view.findViewById(R.id.not_active_btn_more);
     }
 
     private void initRecyclerview() {
         personList = new ArrayList<>();
-        notActivePrescenterLogic.getDataActive();
+        notActivePrescenterLogic.getDataActive(limit);
         adapter = new Adapter(personList,this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         not_active_recyclerview.setHasFixedSize(true);
@@ -158,6 +162,12 @@ public class NotActivedFragment extends Fragment implements NotActivedFragmentVi
             StatisticalBottomSheet statisticalBottomSheet = new StatisticalBottomSheet();
             statisticalBottomSheet.setTypeStatistical(0);
             statisticalBottomSheet.show(getFragmentManager(), TAG);
+        });
+
+        not_active_btn_more.setOnClickListener(v -> {
+            not_active_progressbar.setVisibility(View.VISIBLE);
+            limit += 20;
+            notActivePrescenterLogic.getDataActive(limit);
         });
     }
 
@@ -208,7 +218,7 @@ public class NotActivedFragment extends Fragment implements NotActivedFragmentVi
     public void swipeRefresh() {
         personList.clear();
         not_active_progressbar.setVisibility(View.VISIBLE);
-        if (not_active_spinner.getSelectedItemPosition() == 0) notActivePrescenterLogic.getDataActive();
+        if (not_active_spinner.getSelectedItemPosition() == 0) notActivePrescenterLogic.getDataActive(limit);
         else not_active_spinner.setSelection(0);
     }
 

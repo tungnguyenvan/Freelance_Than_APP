@@ -22,9 +22,9 @@ public class NotActivePrescenterLogic implements NotActivePrescenterIMP {
     }
 
     @Override
-    public void getDataActive() {
+    public void getDataActive(int limit) {
         Call<List<Person>> call = Common.DATA_CLIENT.getPersonStatus(Common.CONTROLLER_PERSON,
-                Common.ACTION_GET_PERSON_STATUS, 0);
+                Common.ACTION_GET_PERSON_STATUS, 0, limit);
         call.enqueue(new Callback<List<Person>>() {
             @Override
             public void onResponse(Call<List<Person>> call, Response<List<Person>> response) {

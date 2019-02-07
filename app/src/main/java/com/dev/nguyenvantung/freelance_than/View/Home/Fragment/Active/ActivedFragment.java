@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -38,13 +39,15 @@ public class ActivedFragment extends Fragment implements ViewActiveFragment, Swi
     private static final String TAG = "ActivedFragment";
     private static final int REQUESTCODE_EDIT_PERSON = 12;
     private static final int REQUESTCODE_SHOW_PERSON = 13;
+    private int limit = 19;
+
     private View view;
     private RecyclerView active_recyclerview;
     private ProgressBar active_progressbar;
     private SwipeRefreshLayout active_swipe;
-//    private Button active_sort;
     private Spinner active_spinner, active_snp_sex;
     private ImageView active_btn_statistical;
+    private Button active_btn_more;
 
     private HomeView homeView;
 
@@ -108,11 +111,13 @@ public class ActivedFragment extends Fragment implements ViewActiveFragment, Swi
         adapterSex.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         active_snp_sex.setAdapter(adapterSex);
         active_btn_statistical = view.findViewById(R.id.active_btn_statiscal);
+
+        active_btn_more = view.findViewById(R.id.active_btn_more);
     }
 
     private void initRecyclerview() {
         personList = new ArrayList<>();
-        activePresscenterLogic.getDataActive();
+        activePresscenterLogic.getDataActive(limit);
         activedAdapter = new Adapter(personList,this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         active_recyclerview.setHasFixedSize(true);
@@ -154,6 +159,12 @@ public class ActivedFragment extends Fragment implements ViewActiveFragment, Swi
             StatisticalBottomSheet statisticalBottomSheet = new StatisticalBottomSheet();
             statisticalBottomSheet.setTypeStatistical(2);
             statisticalBottomSheet.show(getFragmentManager(), TAG);
+        });
+
+        active_btn_more.setOnClickListener(v -> {
+            active_progressbar.setVisibility(View.VISIBLE);
+            limit += 20;
+            activePresscenterLogic.getDataActive(limit);
         });
     }
 
@@ -204,7 +215,7 @@ public class ActivedFragment extends Fragment implements ViewActiveFragment, Swi
     public void swipeRefresh() {
         personList.clear();
         active_progressbar.setVisibility(View.VISIBLE);
-        activePresscenterLogic.getDataActive();
+        activePresscenterLogic.getDataActive(limit);
         active_spinner.setSelection(0);
         active_snp_sex.setSelection(0);
     }

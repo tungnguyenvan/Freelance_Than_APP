@@ -39,12 +39,15 @@ public class WaitFragment extends Fragment implements WaitFragmentView, SwipeRef
     private static final String TAG = "WaitFragment";
     private static final int REQUESTCODE_EDIT_PERSON = 12;
     private static final int REQUESTCODE_SHOW_PERSON = 13;
+    private int limit = 19;
+
     private View view;
     private Spinner wait_spinner, wait_snp_sex;
     private SwipeRefreshLayout wait_swipe;
     private ProgressBar wait_progressbar;
     private RecyclerView wait_recyclerview;
     private ImageView wait_btn_statiscal;
+    private Button wait_btn_more;
 
     private HomeView homeView;
 
@@ -108,11 +111,12 @@ public class WaitFragment extends Fragment implements WaitFragmentView, SwipeRef
         wait_snp_sex.setAdapter(adapterSex);
 
         wait_btn_statiscal = view.findViewById(R.id.wait_btn_statiscal);
+        wait_btn_more = view.findViewById(R.id.wait_btn_more);
     }
 
     private void initRecyclerView() {
         personList = new ArrayList<>();
-        waitPrescenterLogic.getDataActive();
+        waitPrescenterLogic.getDataActive(limit);
         adapter = new Adapter(personList,this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         wait_recyclerview.setHasFixedSize(true);
@@ -154,6 +158,12 @@ public class WaitFragment extends Fragment implements WaitFragmentView, SwipeRef
             StatisticalBottomSheet statisticalBottomSheet = new StatisticalBottomSheet();
             statisticalBottomSheet.setTypeStatistical(1);
             statisticalBottomSheet.show(getFragmentManager(), TAG);
+        });
+
+        wait_btn_more.setOnClickListener(v -> {
+            wait_progressbar.setVisibility(View.VISIBLE);
+            limit += 20;
+            waitPrescenterLogic.getDataActive(limit);
         });
     }
 
@@ -204,7 +214,7 @@ public class WaitFragment extends Fragment implements WaitFragmentView, SwipeRef
     public void swipeRefresh() {
         personList.clear();
         wait_progressbar.setVisibility(View.VISIBLE);
-        if (wait_spinner.getSelectedItemPosition() == 0) waitPrescenterLogic.getDataActive();
+        if (wait_spinner.getSelectedItemPosition() == 0) waitPrescenterLogic.getDataActive(limit);
         else wait_spinner.setSelection(0);
     }
 

@@ -29,6 +29,7 @@ public class Common {
     public static final String ACTION_DELETE_PERSON = "deletePerson";
     public static final String ACTION_GET_PERSON_STATUS = "getPersonStatus";
     public static final String ACTION_SEARCH_PERSON = "searchPerson";
+    public static final String ACTION_SEARCH_PERSON_BY_PHONE = "searchPersonByPhone";
     public static final String ACTION_ACTIVE_PERSON = "activePerson";
     public static final String ACTION_ORDERBY_PERSON = "oderByPerson";
     public static final String ACTION_UPLOADIMAGE = "uploadImage";
@@ -55,6 +56,7 @@ public class Common {
     public static final String TODAY = "to-day";
     public static final String DATAIMAGE = "data_image";
     public static final String TOKEN = "token";
+    public static final String LIMIT = "limit";
 
     //share preference
     public static final String PREFERENCES_LOGIN = "LOGIN";

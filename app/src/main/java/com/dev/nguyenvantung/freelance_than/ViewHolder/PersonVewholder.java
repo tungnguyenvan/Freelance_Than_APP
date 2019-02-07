@@ -143,13 +143,13 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
         txt_day.setText(arrDate[1] + "/" + arrDate[2]);
 
         if (Integer.parseInt(person.getStatus()) == 2){
-            status.setText("Đã kích hoạt");
+            status.setText("Thành công");
             //status.setTextColor(Color.GREEN);
         }else if (Integer.parseInt(person.getStatus()) == 1){
             status.setText("Chờ");
             //status.setTextColor(Color.BLUE);
         }else if (Integer.parseInt(person.getStatus()) == 0){
-            status.setText("Chưa kích hoạt");
+            status.setText("Đang xử lí");
             //status.setTextColor(Color.RED);
         }else if (Integer.parseInt(person.getStatus()) == -1){
             status.setText("Chưa xử lý");
@@ -306,18 +306,8 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
         builder.setTitle("Xóa");
         builder.setMessage("Bạn có chắc xóa người này không?");
         builder.setCancelable(false);
-        builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                DeletePerson();
-            }
-        });
+        builder.setPositiveButton("Không", (dialog, which) -> dialog.dismiss());
+        builder.setNegativeButton("OK", (dialog, which) -> DeletePerson());
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
@@ -327,18 +317,8 @@ public class PersonVewholder extends RecyclerView.ViewHolder implements View.OnC
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setCancelable(false);
-        builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                ActivePerson(status);
-            }
-        });
+        builder.setPositiveButton("Không", (dialog, which) -> dialog.dismiss());
+        builder.setNegativeButton("OK", (dialog, which) -> ActivePerson(status));
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }

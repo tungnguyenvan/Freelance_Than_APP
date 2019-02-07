@@ -12,7 +12,20 @@
         android:id="@+id/ed_search"
         android:drawableLeft="@drawable/ic_search_24dp"
         android:textSize="14sp"
-        android:hint="Tìm kiếm tên hoặc id"
+        android:hint="Tìm kiếm tên - id"
+        android:layout_marginTop="@dimen/margin_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/ed_search_by_phone"
+        android:inputType="number"
+        android:drawableTint="@color/design_default_color_primary"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_primary"
+        android:drawableLeft="@drawable/ic_search_24dp"
+        android:textSize="14sp"
+        android:hint="Tìm kiếm số điện thoại"
         android:layout_marginTop="@dimen/margin_8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

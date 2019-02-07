@@ -44,7 +44,7 @@ public class StatisticalPersenterLogic implements StatisticalPersenterIMP {
     @Override
     public void getAllPersonFromStatus(int status) {
         Call<List<Person>> call = Common.DATA_CLIENT.getPersonStatus(Common.CONTROLLER_PERSON,
-                Common.ACTION_GET_PERSON_STATUS, status);
+                Common.ACTION_GET_PERSON_STATUS, status, 1000000);
         call.enqueue(new Callback<List<Person>>() {
             @Override
             public void onResponse(Call<List<Person>> call, Response<List<Person>> response) {

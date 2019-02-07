@@ -18,7 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
-                    android:text="Chờ"
+                    android:text="Danh sách chờ"
                     android:textStyle="bold"
                     android:textColor="#fff"
                     android:id="@+id/new_txt_title"
@@ -72,12 +72,26 @@
             android:id="@+id/wait_swipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/wait_recyclerview"
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/wait_recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
-            </android.support.v7.widget.RecyclerView>
+                    <Button
+                        android:id="@+id/wait_btn_more"
+                        android:text="Xem thêm"
+                        android:textAllCaps="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <ProgressBar

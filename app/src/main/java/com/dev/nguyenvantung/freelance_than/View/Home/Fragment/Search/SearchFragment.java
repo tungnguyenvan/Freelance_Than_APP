@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,11 +33,11 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchFragment extends Fragment implements TextWatcher, ViewSearchFragment, SwipeRefreshLayout.OnRefreshListener{
+public class SearchFragment extends Fragment implements ViewSearchFragment, SwipeRefreshLayout.OnRefreshListener{
     private static final int REQUESTCODE_EDIT_PERSON = 12;
     private static final int REQUESTCODE_SHOW_PERSON = 13;
     private View view;
-    private EditText ed_search;
+    private EditText ed_search, ed_search_by_phone;
     private SwipeRefreshLayout search_swipe;
 
     private HomeView homeView;
@@ -74,6 +75,7 @@ public class SearchFragment extends Fragment implements TextWatcher, ViewSearchF
 
     private void addControls() {
         ed_search = view.findViewById(R.id.ed_search);
+        ed_search_by_phone = view.findViewById(R.id.ed_search_by_phone);
         search_swipe = view.findViewById(R.id.search_swipe);
         search_recyclerview = view.findViewById(R.id.search_recyclerview);
         search_progressbar = view.findViewById(R.id.search_progressbar);
@@ -92,31 +94,53 @@ public class SearchFragment extends Fragment implements TextWatcher, ViewSearchF
 
     private void addEvents() {
         search_swipe.setOnRefreshListener(this);
-        ed_search.addTextChangedListener(this);
+
+        /**************************************/
+        ed_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!s.equals("") || !s.equals(" ")) {
+                    personList.clear();
+                    adapter.notifyDataSetChanged();
+                    search_progressbar.setVisibility(View.VISIBLE);
+                    searchPrescenterLogic.GetDataSearch(s.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        /*************************************/
+        ed_search_by_phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!s.equals("") || !s.equals(" ")) {
+                    personList.clear();
+                    adapter.notifyDataSetChanged();
+                    search_progressbar.setVisibility(View.VISIBLE);
+                    searchPrescenterLogic.GetDataSearchByPhone(s.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
-
-
-
-    //text change
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        if (!s.equals("") || !s.equals(" ")) {
-            personList.clear();
-            adapter.notifyDataSetChanged();
-            search_progressbar.setVisibility(View.VISIBLE);
-            searchPrescenterLogic.GetDataSearch(s.toString());
-        }
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
-    }//end text change
 
 
     //get person
@@ -127,17 +151,22 @@ public class SearchFragment extends Fragment implements TextWatcher, ViewSearchF
         personList.addAll(list);
         adapter.notifyDataSetChanged();
         search_swipe.setRefreshing(false);
+        Log.d("SIZE SEARCH: ", String.valueOf(personList.size()));
     }
 
     @Override
     public void getPersonFail() {
         Toast.makeText(getContext(), "Không có kết quả", Toast.LENGTH_SHORT).show();
-    }//get person
+    }
 
     @Override
     public void swipeRefresh() {
         personList.clear();
-        searchPrescenterLogic.GetDataSearch(ed_search.getText().toString());
+        if (ed_search.getText().toString().isEmpty()){
+            searchPrescenterLogic.GetDataSearchByPhone(ed_search_by_phone.getText().toString());
+        }else {
+            searchPrescenterLogic.GetDataSearch(ed_search.getText().toString());
+        }
     }
 
     @Override

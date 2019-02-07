@@ -37,4 +37,23 @@ public class SearchPrescenterLogic implements SearchPrescenterIMP {
             }
         });
     }
+
+    @Override
+    public void GetDataSearchByPhone(String find) {
+        Call<List<Person>> callback = Common.DATA_CLIENT.searchPersonByPhone(Common.CONTROLLER_PERSON,
+                Common.ACTION_SEARCH_PERSON_BY_PHONE, find);
+        callback.enqueue(new Callback<List<Person>>() {
+            @Override
+            public void onResponse(Call<List<Person>> call, Response<List<Person>> response) {
+                if (response.body().size() > 0) viewSearchFragment.getPersonSuccess(response.body());
+                else viewSearchFragment.getPersonFail();
+            }
+
+            @Override
+            public void onFailure(Call<List<Person>> call, Throwable t) {
+                Log.e("SEARCH", t.getLocalizedMessage());
+                viewSearchFragment.getPersonFail();
+            }
+        });
+    }
 }

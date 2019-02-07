@@ -276,54 +276,51 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btn_shk:
-                checkPermissionRead();
-                IMAGE = img_shk;
-                UploadImage();
-                break;
-            case R.id.btn_xnds:
-                checkPermissionRead();
-                IMAGE = img_xnds;
-                UploadImage();
-                break;
-            case R.id.btn_gks:
-                checkPermissionRead();
-                IMAGE = img_gks;
-                UploadImage();
-                break;
-            case R.id.btn_gkh:
-                checkPermissionRead();
-                IMAGE = img_gkh;
-                UploadImage();
-                break;
-            case R.id.update_info:
-                UpdateInfor();
-                break;
-            case R.id.edit_btn_opencontact:
-                checkPermissionRead();
-                openContact();
-                break;
-            case R.id.btn_khac1:
-                IMAGE = img_khac1;
-                UploadImage();
-                break;
-            case R.id.btn_khac2:
-                IMAGE = img_khac2;
-                UploadImage();
-                break;
-            case R.id.btn_khac3:
-                IMAGE = img_khac3;
-                UploadImage();
-                break;
-            case R.id.btn_khac4:
-                IMAGE = img_khac4;
-                UploadImage();
-                break;
-            case R.id.btn_khac5:
-                IMAGE = img_khac5;
-                UploadImage();
-                break;
+        if (checkPermissionRead()) {
+            switch (v.getId()) {
+                case R.id.btn_shk:
+                    IMAGE = img_shk;
+                    UploadImage();
+                    break;
+                case R.id.btn_xnds:
+                    IMAGE = img_xnds;
+                    UploadImage();
+                    break;
+                case R.id.btn_gks:
+                    IMAGE = img_gks;
+                    UploadImage();
+                    break;
+                case R.id.btn_gkh:
+                    IMAGE = img_gkh;
+                    UploadImage();
+                    break;
+                case R.id.update_info:
+                    UpdateInfor();
+                    break;
+                case R.id.edit_btn_opencontact:
+                    openContact();
+                    break;
+                case R.id.btn_khac1:
+                    IMAGE = img_khac1;
+                    UploadImage();
+                    break;
+                case R.id.btn_khac2:
+                    IMAGE = img_khac2;
+                    UploadImage();
+                    break;
+                case R.id.btn_khac3:
+                    IMAGE = img_khac3;
+                    UploadImage();
+                    break;
+                case R.id.btn_khac4:
+                    IMAGE = img_khac4;
+                    UploadImage();
+                    break;
+                case R.id.btn_khac5:
+                    IMAGE = img_khac5;
+                    UploadImage();
+                    break;
+            }
         }
     }
 
@@ -387,19 +384,23 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         startActivityForResult(intent, REQUEST_CODE_IMAGE);
     }
 
-    private void checkPermissionRead() {
+    private boolean checkPermissionRead() {
         if (Build.VERSION.SDK_INT >= 23){
             if (!(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
                     PackageManager.PERMISSION_GRANTED)){
                 ActivityCompat.requestPermissions(this
                         , new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
                         REQUEST_PERMISSION_READ_EX);
+                return false;
             }
             if (checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS},
                         REQUEST_PERMISSION_READ_CONTACT);
+                return false;
             }
         }
+
+        return true;
     }
 
     @Override
@@ -457,7 +458,6 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
                     if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0)
                     {
-
                         Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = "+ id,null, null);
                         while (phones.moveToNext()) {
                             String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
@@ -495,18 +495,11 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(TAG, response.body().getMessage().toString());
                 if (response.body().getMessage().toString().equals("true")) {
                     Picasso.get().load(Common.WEB_IMAGE + finalFile_path).into(imageView);
-//                    UpdatePersonImage(imageView,finalFile_path);
                     Toast.makeText(EditActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
                 }else
                     Toast.makeText(EditActivity.this, "Upload Thất bại, Thử lại", Toast.LENGTH_SHORT).show();
 
                 dimissProgressbar();
-//
-//                try {
-//                    Log.d(TAG, response.body().string());
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
             }
 
             @Override
@@ -519,45 +512,6 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
         return finalFile_path;
     }
-
-//    private void UpdatePersonImage(ImageView imageView, String finalFile_path) {
-//        String key = "";
-//        switch (imageView.getId()){
-//            case R.id.SHK: key = "SHK"; break;
-//            case R.id.XNDS: key = "XNDS"; break;
-//            case R.id.GKS: key = "GKS"; break;
-//            case R.id.GKH: key = "GKH"; break;
-//            case R.id.img_khac1: key = "khac1"; break;
-//            case R.id.img_khac2: key = "khac2"; break;
-//            case R.id.img_khac3: key = "khac3"; break;
-//            case R.id.img_khac4: key = "khac4"; break;
-//            case R.id.img_khac5: key = "khac5"; break;
-//        }
-
-//        Call<Message> call = Common.DATA_CLIENT.updateImagePerson(Common.CONTROLLER_PERSON,
-//                Common.ACTION_UPDATE_IMAGE_PERSON,
-//                key, finalFile_path, Integer.parseInt(person.getId()));
-//        call.enqueue(new Callback<Message>() {
-//            @Override
-//            public void onResponse(Call<Message> call, Response<Message> response) {
-//                if (response.body().getMessage() == true)
-//                    Toast.makeText(EditActivity.this, "Thành công", Toast.LENGTH_SHORT).show();
-//                else Toast.makeText(EditActivity.this, "Upload that bai, thử lai", Toast.LENGTH_SHORT).show();
-////
-////                try {
-////                    Log.d(TAG, response.body().string());
-////                } catch (IOException e) {
-////                    e.printStackTrace();
-////                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Message> call, Throwable t) {
-//
-//            }
-//        });
-//    }
-
 
     public String getRealPathFromUri(Uri contentUri){
         String path = null;

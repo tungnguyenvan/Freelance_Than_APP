@@ -55,7 +55,8 @@ public interface DataClient {
     @POST(Common.WEB_API)
     Call<List<Person>> getPersonStatus(@Field(Common.CONTROLLER) String Controller,
                                        @Field(Common.ACTION) String action,
-                                       @Field(Common.STATUS) int status);
+                                       @Field(Common.STATUS) int status,
+                                       @Field(Common.LIMIT) int limit);
 
     //Search Person
     @FormUrlEncoded
@@ -63,6 +64,13 @@ public interface DataClient {
     Call<List<Person>> searchPerson(@Field(Common.CONTROLLER) String controller,
                                     @Field(Common.ACTION) String action,
                                     @Field(Common.FIND) String find);
+
+    //Search Person by phone
+    @FormUrlEncoded
+    @POST(Common.WEB_API)
+    Call<List<Person>> searchPersonByPhone(@Field(Common.CONTROLLER) String controller,
+                                           @Field(Common.ACTION) String action,
+                                           @Field(Common.FIND) String find);
 
     //active person
     @FormUrlEncoded
